@@ -1,12 +1,9 @@
 name: Deploy ICANDOIT website to GitHub Pages
 
 on:
-  push:
-    branches:
-      - claude/icandoit-website-deploy-jln1zy
-    paths:
-      - "docs/**"
-      - ".github/workflows/deploy-pages.yml"
+  # Run manually after Pages has been enabled (Settings → Pages → Source: GitHub Actions).
+  # While Pages source is "Deploy from a branch", leave this on manual only so it
+  # does not produce noisy failed runs.
   workflow_dispatch:
 
 permissions:
