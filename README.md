@@ -1,12 +1,18 @@
-# ICANDOIT – Web điểm danh từ xa
+# ICANDOIT – Web điểm danh & kế toán trung tâm ngoại ngữ
 
-Ứng dụng web giúp nhân viên **điểm danh từ xa** (check-in / check-out) bằng cách
-đăng nhập rồi bấm nút, và quản trị viên theo dõi bảng điểm danh toàn công ty.
+Ứng dụng web cho trung tâm ngoại ngữ **ICANDOIT ACADEMIC ENGLISH** gồm hai phân hệ:
+
+1. **Điểm danh từ xa** — nhân viên check-in / check-out bằng một chạm, quản trị
+   viên theo dõi bảng điểm danh toàn trung tâm.
+2. **Kế toán** — quản lý học viên, khóa học, ghi danh & học phí, sổ quỹ thu/chi
+   và báo cáo tài chính.
+
 Ứng dụng được thiết kế để **kết nối phần mềm ICANDOIT** thông qua một lớp tích
 hợp (adapter) — chạy độc lập ngay cả khi ICANDOIT chưa cung cấp API.
 
 ## Tính năng
 
+### Điểm danh
 - **Đăng nhập tài khoản** (nhân viên / quản trị viên).
 - **Check-in / Check-out một chạm** với đồng hồ thời gian thực, tự đánh giá
   đúng giờ / đi muộn theo giờ vào chuẩn cấu hình.
@@ -15,6 +21,21 @@ hợp (adapter) — chạy độc lập ngay cả khi ICANDOIT chưa cung cấp 
   trạng thái đồng bộ), **xuất CSV** (UTF-8, mở được bằng Excel tiếng Việt), và
   nút **đồng bộ lại** từng bản ghi.
 - **Lớp tích hợp ICANDOIT** dạng adapter, sẵn sàng bật khi có API thật.
+
+### Kế toán (chỉ quản trị viên)
+- **Bảng điều khiển kế toán**: tổng thu / chi / lợi nhuận tháng, biểu đồ thu–chi
+  12 tháng, công nợ học phí và các phiếu gần đây.
+- **Học viên**: hồ sơ học viên, theo dõi học phí phải thu / đã thu / còn nợ.
+- **Khóa học**: danh mục khóa học kèm mức học phí chuẩn và số buổi.
+- **Ghi danh**: gắn học viên với khóa học (có giảm giá), thu học phí trực tiếp —
+  hệ thống tự lập **phiếu thu** và cập nhật công nợ.
+- **Sổ quỹ thu / chi**: lập phiếu thu (PT-…) / phiếu chi (PC-…) với số phiếu tự
+  sinh theo ngày, phân loại theo **danh mục**, lọc theo khoảng thời gian.
+- **Báo cáo tài chính**: tổng hợp thu / chi theo danh mục trong kỳ, **xuất CSV**.
+- Định dạng tiền tệ đồng Việt Nam qua chỉ thị Blade `@vnd`.
+
+Nghiệp vụ kế toán nằm gọn trong `App\Services\AccountingService` (sinh số phiếu,
+ghi nhận thu/chi, tổng hợp báo cáo).
 
 ## Công nghệ
 
@@ -90,14 +111,21 @@ php artisan test
 
 ```
 app/
-  Http/Controllers/        Auth, Dashboard, Attendance, Admin
+  Http/Controllers/        Auth, Dashboard, Attendance
+    Admin/                 Attendance + Kế toán (Accounting, Transaction,
+                           Student, Course, Enrollment, TransactionCategory)
   Http/Middleware/         EnsureUserIsAdmin
-  Models/                  User, Attendance
+  Models/                  User, Attendance, Student, Course, Enrollment,
+                           Transaction, TransactionCategory
   Services/
     AttendanceService.php  Nghiệp vụ check-in/out + đồng bộ
+    AccountingService.php  Nghiệp vụ thu/chi, sinh số phiếu, báo cáo
     Icandoit/              Lớp tích hợp ICANDOIT (adapter)
-resources/views/           Giao diện Blade (Tailwind)
+  Support/Money.php        Định dạng tiền tệ VND
+resources/views/
+  admin/accounting|transactions|students|courses|enrollments|categories
+  partials/accounting-nav  Thanh điều hướng phân hệ kế toán
 routes/web.php             Định tuyến
-database/                  Migrations + seeder
-tests/Feature/             Kiểm thử luồng điểm danh
+database/                  Migrations + seeder (DatabaseSeeder, AccountingSeeder)
+tests/Feature/             Kiểm thử luồng điểm danh & kế toán
 ```

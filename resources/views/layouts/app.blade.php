@@ -23,6 +23,7 @@
                         <a href="{{ route('attendance.history') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Lịch sử</a>
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('admin.attendance') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Quản trị</a>
+                            <a href="{{ route('admin.accounting') }}" class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('admin.accounting') || request()->routeIs('admin.transactions.*') || request()->routeIs('admin.students.*') || request()->routeIs('admin.courses.*') || request()->routeIs('admin.enrollments.*') || request()->routeIs('admin.categories.*') ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-100' }}">Kế toán</a>
                         @endif
                     </div>
                 </div>

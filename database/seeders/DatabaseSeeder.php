@@ -46,5 +46,8 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         }
+
+        // Dữ liệu kế toán mẫu (danh mục, khóa học, học viên, thu/chi).
+        $this->call(AccountingSeeder::class);
     }
 }

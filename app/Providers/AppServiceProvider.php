@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\Icandoit\HttpIcandoitConnector;
 use App\Services\Icandoit\IcandoitConnector;
 use App\Services\Icandoit\NullIcandoitConnector;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // @vnd($amount) — định dạng tiền tệ đồng Việt Nam trong Blade.
+        Blade::directive('vnd', fn (string $expression) => "<?php echo \App\Support\Money::vnd($expression); ?>");
     }
 }
