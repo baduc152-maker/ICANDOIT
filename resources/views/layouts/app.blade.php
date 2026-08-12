@@ -14,8 +14,8 @@
         <div class="mx-auto max-w-6xl px-4">
             <div class="flex h-16 items-center justify-between">
                 <div class="flex items-center gap-6">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2 font-bold text-indigo-600">
-                        <span class="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-white">✓</span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2 font-bold text-[#e1232b]">
+                        <img src="{{ asset(config('center.brand.logo_mark')) }}" alt="ICANDOIT" class="h-9 w-auto">
                         ICANDOIT
                     </a>
                     <div class="hidden gap-1 sm:flex">
@@ -23,7 +23,9 @@
                         <a href="{{ route('attendance.history') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Lịch sử</a>
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('admin.attendance') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Quản trị</a>
+                            <a href="{{ route('admin.consultations') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Đăng ký tư vấn</a>
                         @endif
+                        <a href="{{ route('site.home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Website</a>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -58,7 +60,7 @@
     </main>
 
     <footer class="py-6 text-center text-xs text-slate-400">
-        Web điểm danh từ xa · kết nối phần mềm ICANDOIT
+        Khu vực nội bộ ICANDOIT · <a href="{{ route('site.home') }}" class="underline hover:text-slate-600">Về website trung tâm</a>
     </footer>
 </div>
 </body>

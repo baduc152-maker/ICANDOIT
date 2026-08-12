@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="124 8 310 358" role="img" aria-label="Biểu tượng I CAN DO IT ENGLISH">
+  <title>I CAN DO IT ENGLISH</title>
+
+  <!-- Ngôi sao nhỏ trên đỉnh -->
+  <polygon fill="#E1232B"
+    points="252.0,18.0 258.5,37.1 278.6,37.3 262.5,49.4 268.5,68.7 252.0,57.0 235.5,68.7 241.5,49.4 225.4,37.3 245.5,37.1"/>
+
+  <!-- Ngôi sao lớn viền đỏ -->
+  <polygon fill="none" stroke="#E1232B" stroke-width="17" stroke-linejoin="round"
+    points="292.0,74.0 323.2,163.1 417.5,165.2 342.4,222.4 369.6,312.8 292.0,259.0 214.4,312.8 241.6,222.4 166.5,165.2 260.8,163.1"/>
+
+  <!-- Hình người vươn lên: thân, tay, chân -->
+  <g stroke="#1B3A73" fill="none" stroke-linecap="round">
+    <path d="M201 204 C 215 226 215 246 203 264" stroke-width="46"/>
+    <path d="M196 208 C 170 194 150 166 142 130" stroke-width="23"/>
+    <path d="M206 206 C 232 190 250 164 258 128" stroke-width="23"/>
+    <path d="M200 262 C 188 292 170 316 150 332" stroke-width="25"/>
+    <path d="M206 262 C 224 288 234 316 234 344" stroke-width="25"/>
+  </g>
+
+  <!-- Đầu -->
+  <rect x="189" y="168" width="22" height="26" fill="#1B3A73"/>
+  <circle cx="200" cy="152" r="27" fill="#1B3A73"/>
+
+  <!-- Mũ tốt nghiệp -->
+  <path d="M177 118 C 177 106 223 106 223 118 L 223 124 C 223 134 177 134 177 124 Z" fill="#14295A"/>
+  <polygon points="200,84 259,106 200,128 141,106" fill="#14295A"/>
+  <path d="M255 110 C 265 126 265 140 262 148" stroke="#E1232B" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="262" cy="153" r="7" fill="#E1232B"/>
+
+  <!-- Cà vạt -->
+  <path d="M193 188 L 211 195 L 206 208 L 190 201 Z" fill="#E1232B"/>
+  <path d="M206 208 L 190 201 L 190 246 L 202 239 Z" fill="#E1232B"/>
+</svg>
