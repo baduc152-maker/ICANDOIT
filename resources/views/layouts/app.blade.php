@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Điểm danh từ xa') · ICANDOIT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ asset(config('center.brand.logo_mark')) }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body class="h-full text-slate-800">
 <div class="min-h-full">
@@ -24,6 +25,7 @@
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('admin.attendance') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Quản trị</a>
                             <a href="{{ route('admin.consultations') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Đăng ký tư vấn</a>
+                            <a href="{{ route('admin.content') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Nội dung website</a>
                         @endif
                         <a href="{{ route('site.home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Website</a>
                     </div>

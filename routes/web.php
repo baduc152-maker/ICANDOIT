@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AttendanceAdminController;
 use App\Http\Controllers\Admin\ConsultationAdminController;
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -56,6 +57,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/attendance', [AttendanceAdminController::class, 'index'])->name('attendance');
     Route::get('/attendance/export', [AttendanceAdminController::class, 'export'])->name('attendance.export');
     Route::post('/attendance/{attendance}/resync', [AttendanceAdminController::class, 'resync'])->name('attendance.resync');
+
+    // Trang nhập và chỉnh sửa nội dung website.
+    Route::get('/noi-dung', [ContentController::class, 'index'])->name('content');
+    Route::get('/noi-dung/{section}', [ContentController::class, 'edit'])->name('content.edit');
+    Route::put('/noi-dung/{section}', [ContentController::class, 'update'])->name('content.update');
+    Route::post('/noi-dung/{section}/khoi-phuc', [ContentController::class, 'reset'])->name('content.reset');
 
     Route::get('/consultations', [ConsultationAdminController::class, 'index'])->name('consultations');
     Route::get('/consultations/export', [ConsultationAdminController::class, 'export'])->name('consultations.export');

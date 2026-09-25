@@ -1,0 +1,161 @@
+/* =========================================================================
+   Giao diện khu vực nội bộ ICANDOIT (đăng nhập, điểm danh, quản trị).
+   Các lớp tiện ích dưới đây viết theo quy ước Tailwind mà các trang Blade
+   đang dùng, nhưng phục vụ ngay tại máy chủ để trang quản trị không phụ
+   thuộc vào CDN bên ngoài.
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; border: 0 solid #e2e8f0; }
+html { -webkit-text-size-adjust: 100%; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.5; }
+body { margin: 0; }
+h1, h2, h3, h4 { margin: 0; font-size: inherit; font-weight: inherit; }
+p, figure { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+table { border-collapse: collapse; }
+button, input, select, textarea { font: inherit; color: inherit; margin: 0; }
+button { background: none; cursor: pointer; }
+textarea { resize: vertical; }
+[hidden] { display: none; }
+
+/* ---------------------------------------------------------- Bố cục */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+.flex-1 { flex: 1 1 0%; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gap-1 { gap: .25rem; } .gap-2 { gap: .5rem; } .gap-3 { gap: .75rem; }
+.gap-4 { gap: 1rem; } .gap-5 { gap: 1.25rem; } .gap-6 { gap: 1.5rem; }
+.space-y-3 > * + * { margin-top: .75rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.sticky { position: sticky; }
+.bottom-0 { bottom: 0; }
+.ml-auto { margin-left: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.overflow-x-auto { overflow-x: auto; }
+.align-top { vertical-align: top; }
+.transition { transition: all .15s ease; }
+.backdrop-blur { backdrop-filter: blur(8px); }
+.opacity-30 { opacity: .3; }
+
+/* -------------------------------------------------- Kích thước, lề */
+.h-9 { height: 2.25rem; } .h-16 { height: 4rem; } .h-full { height: 100%; }
+.min-h-full { min-height: 100%; }
+.min-h-\[70vh\] { min-height: 70vh; }
+.w-full { width: 100%; } .w-auto { width: auto; } .w-44 { width: 11rem; }
+.max-w-sm { max-width: 24rem; } .max-w-6xl { max-width: 72rem; }
+.mb-1 { margin-bottom: .25rem; } .mb-2 { margin-bottom: .5rem; } .mb-3 { margin-bottom: .75rem; }
+.mb-4 { margin-bottom: 1rem; } .mb-6 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: .25rem; } .mt-2 { margin-top: .5rem; } .mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; } .mt-6 { margin-top: 1.5rem; }
+.p-4 { padding: 1rem; } .p-5 { padding: 1.25rem; } .p-6 { padding: 1.5rem; }
+.px-2 { padding-left: .5rem; padding-right: .5rem; }
+.px-3 { padding-left: .75rem; padding-right: .75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.py-0\.5 { padding-top: .125rem; padding-bottom: .125rem; }
+.py-1 { padding-top: .25rem; padding-bottom: .25rem; }
+.py-2 { padding-top: .5rem; padding-bottom: .5rem; }
+.py-2\.5 { padding-top: .625rem; padding-bottom: .625rem; }
+.py-3 { padding-top: .75rem; padding-bottom: .75rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.pb-3 { padding-bottom: .75rem; } .pl-5 { padding-left: 1.25rem; }
+.pr-4 { padding-right: 1rem; } .pt-5 { padding-top: 1.25rem; } .pt-6 { padding-top: 1.5rem; }
+
+/* ------------------------------------------------------- Chữ, màu */
+.text-xs { font-size: .75rem; line-height: 1rem; }
+.text-sm { font-size: .875rem; line-height: 1.25rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.text-left { text-align: left; } .text-center { text-align: center; } .text-right { text-align: right; }
+.underline { text-decoration: underline; }
+.list-disc { list-style: disc; }
+
+.text-white { color: #fff; }
+.text-slate-400 { color: #94a3b8; } .text-slate-500 { color: #64748b; }
+.text-slate-600 { color: #475569; } .text-slate-700 { color: #334155; } .text-slate-800 { color: #1e293b; }
+.text-indigo-600 { color: #4f46e5; } .text-indigo-700 { color: #4338ca; }
+.text-emerald-700 { color: #047857; }
+.text-rose-600 { color: #e11d48; } .text-rose-700 { color: #be123c; }
+.text-amber-600 { color: #d97706; } .text-amber-700 { color: #b45309; }
+.text-\[\#e1232b\] { color: #e1232b; }
+
+.bg-white { background-color: #fff; }
+.bg-white\/95 { background-color: rgba(255, 255, 255, .95); }
+.bg-slate-100 { background-color: #f1f5f9; } .bg-slate-800 { background-color: #1e293b; }
+.bg-indigo-50 { background-color: #eef2ff; } .bg-indigo-600 { background-color: #4f46e5; }
+.bg-emerald-50 { background-color: #ecfdf5; } .bg-emerald-100 { background-color: #d1fae5; }
+.bg-emerald-600 { background-color: #059669; }
+.bg-rose-50 { background-color: #fff1f2; } .bg-rose-600 { background-color: #e11d48; }
+.bg-amber-100 { background-color: #fef3c7; }
+
+/* -------------------------------------------------- Viền, bo, bóng */
+.border { border-width: 1px; } .border-b { border-bottom-width: 1px; } .border-t { border-top-width: 1px; }
+.border-dashed { border-style: dashed; }
+.border-slate-200 { border-color: #e2e8f0; } .border-slate-300 { border-color: #cbd5e1; }
+.border-indigo-200 { border-color: #c7d2fe; }
+.border-emerald-200 { border-color: #a7f3d0; }
+.border-rose-200 { border-color: #fecdd3; }
+.divide-y > * + * { border-top-width: 1px; }
+.rounded { border-radius: .25rem; } .rounded-md { border-radius: .375rem; }
+.rounded-lg { border-radius: .5rem; } .rounded-xl { border-radius: .75rem; }
+.rounded-2xl { border-radius: 1rem; } .rounded-full { border-radius: 9999px; }
+.shadow-sm { box-shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 1px 3px rgba(15, 23, 42, .06); }
+
+/* ------------------------------------------------------ Tương tác */
+.hover\:bg-slate-50:hover { background-color: #f8fafc; }
+.hover\:bg-slate-100:hover { background-color: #f1f5f9; }
+.hover\:bg-slate-200:hover { background-color: #e2e8f0; }
+.hover\:bg-slate-900:hover { background-color: #0f172a; }
+.hover\:bg-indigo-100:hover { background-color: #e0e7ff; }
+.hover\:bg-indigo-700:hover { background-color: #4338ca; }
+.hover\:bg-emerald-700:hover { background-color: #047857; }
+.hover\:bg-rose-50:hover { background-color: #fff1f2; }
+.hover\:bg-rose-100:hover { background-color: #ffe4e6; }
+.hover\:bg-rose-700:hover { background-color: #be123c; }
+.hover\:text-indigo-600:hover { color: #4f46e5; }
+.hover\:text-slate-600:hover { color: #475569; }
+.hover\:text-slate-700:hover { color: #334155; }
+.hover\:underline:hover { text-decoration: underline; }
+.hover\:shadow-md:hover { box-shadow: 0 4px 6px rgba(15, 23, 42, .08), 0 10px 15px rgba(15, 23, 42, .08); }
+.group:hover .group-hover\:text-indigo-600 { color: #4f46e5; }
+
+.focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+.focus\:border-indigo-500:focus { border-color: #6366f1; }
+.focus\:ring-1:focus { box-shadow: 0 0 0 1px #6366f1; }
+.focus\:ring-indigo-500:focus { box-shadow: 0 0 0 1px #6366f1; }
+.focus\:border-rose-500:focus { border-color: #f43f5e; }
+.focus\:ring-rose-500:focus { box-shadow: 0 0 0 1px #f43f5e; }
+input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: #4f46e5; }
+
+/* ------------------------------------------------------ Responsive */
+@media (min-width: 640px) {
+    .sm\:block { display: block; }
+    .sm\:flex { display: flex; }
+    .sm\:flex-row { flex-direction: row; }
+    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .sm\:col-span-2 { grid-column: span 2 / span 2; }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg\:col-span-2 { grid-column: span 2 / span 2; }
+}

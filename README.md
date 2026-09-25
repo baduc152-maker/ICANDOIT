@@ -49,7 +49,35 @@ không cần đụng tới giao diện:
 
 > ⚠️ **Lưu ý quan trọng:** thông tin liên hệ, học phí, hồ sơ giảng viên, cảm nhận
 > học viên và lịch khai giảng hiện là **dữ liệu mẫu** để minh hoạ bố cục. Hãy thay
-> bằng thông tin thật của trung tâm trước khi đưa website lên môi trường thật.
+> bằng thông tin thật của trung tâm trước khi đưa website lên môi trường thật —
+> nhanh nhất là sửa trực tiếp trong trang quản trị nội dung `/admin/noi-dung`.
+
+### Trang quản trị nội dung (back-office)
+
+Toàn bộ nội dung website sửa được ngay trên trình duyệt tại **`/admin/noi-dung`**
+(đăng nhập bằng tài khoản quản trị), không cần sửa mã nguồn:
+
+| Nhóm nội dung | Sửa được gì |
+|---------------|-------------|
+| Thương hiệu | Tên trung tâm, slogan, mô tả, năm thành lập, đường dẫn logo |
+| Thông tin liên hệ | Hotline, email, địa chỉ, giờ làm việc, Facebook / YouTube / Zalo / Messenger |
+| Con số nổi bật · Giá trị khác biệt · Quy trình đào tạo | Thêm, sửa, xoá, đổi thứ tự từng mục |
+| Khoá học | Thêm khoá mới hoặc sửa khoá cũ: thông tin lớp, đối tượng, đầu ra, chương trình học |
+| Giảng viên · Cảm nhận học viên · Lịch khai giảng · Câu hỏi thường gặp | Thêm, sửa, xoá, đổi thứ tự |
+| Bài viết cẩm nang | Tiêu đề, đường dẫn, chuyên mục, tóm tắt và nội dung nhiều đoạn |
+| Lựa chọn trong form tư vấn | Các mục thêm vào ô "Khoá học quan tâm" |
+
+Cách hoạt động:
+
+- Nội dung nhập ở trang quản trị được lưu vào bảng `site_contents` và **ghi đè**
+  bản mặc định trong `config/center.php`; nhóm nào chưa sửa vẫn dùng bản mặc định.
+- Mỗi nhóm có nút **Khôi phục mặc định** để quay lại nội dung gốc, và nút
+  **Xem trên website** để kiểm tra kết quả ngay.
+- Với danh sách (khoá học, giảng viên...), mỗi mục có nút thêm, xoá và mũi tên
+  ↑ ↓ để đổi thứ tự hiển thị trên website.
+- Một số ô nhập nhiều giá trị: *mỗi dòng một ý* (đối tượng học viên, kết quả đầu
+  ra), *mỗi đoạn cách nhau một dòng trống* (nội dung bài viết) và dạng
+  `Tên phần :: Mô tả phần` (chương trình học).
 
 ### Đăng ký tư vấn
 
@@ -158,9 +186,11 @@ php artisan test
 app/
   Http/Controllers/        Auth, Dashboard, Attendance, Admin
   Http/Middleware/         EnsureUserIsAdmin
-  Models/                  User, Attendance, Consultation
+  Models/                  User, Attendance, Consultation, SiteContent
+  Support/                 Khai báo cấu trúc nội dung website (SiteContentSchema)
   Services/
     AttendanceService.php  Nghiệp vụ check-in/out + đồng bộ
+    SiteContentManager.php Đọc/ghi nội dung website do quản trị viên chỉnh sửa
     Icandoit/              Lớp tích hợp ICANDOIT (adapter)
 resources/views/site/      Giao diện website trung tâm (Blade + CSS thuần)
 resources/views/           Giao diện khu vực nội bộ (Blade + Tailwind CDN)
