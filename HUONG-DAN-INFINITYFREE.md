@@ -105,6 +105,25 @@ quản trị sẽ được tạo ở **Phần 5** ngay trên trình duyệt.
 
 ---
 
+## Khi hosting không chạy được bản thường (báo 404 ở mọi đường dẫn)
+
+Một số hosting không cho `.htaccess` chuyển hướng vào thư mục con, nên bản đóng
+gói thường (có thư mục `public/`) sẽ báo *Not Found*. Khi đó dùng **bản phẳng**:
+
+```bash
+bash scripts/build-release-flat.sh    # tạo release/icandoit-website-flat.zip
+```
+
+Bản này đặt nội dung của `public/` ngay thư mục gốc, còn mã nguồn nằm trong thư
+mục con `laravel/` và bị chặn truy cập từ web. Cách dùng:
+
+1. Trong File Manager, vào `htdocs` → **Select All** → **Delete** để xoá bản cũ.
+2. Tải `icandoit-website-flat.zip` lên `htdocs` rồi giải nén.
+3. Mở `http://ten-mien-cua-ban/cai-dat` và làm tiếp như Phần 5.
+
+Sau khi giải nén, trong `htdocs` phải thấy: `index.php`, `.htaccess`, các thư mục
+`css`, `js`, `images` và thư mục `laravel`.
+
 ## Khi gặp lỗi
 
 | Hiện tượng | Cách xử lý |
