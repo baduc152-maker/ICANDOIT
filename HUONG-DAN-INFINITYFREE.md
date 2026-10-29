@@ -1,9 +1,9 @@
-# Hướng dẫn lấy tên miền `.rf.gd` miễn phí và đưa website lên
+# Hướng dẫn lấy tên miền miễn phí và đưa website lên InfinityFree
 
-`rf.gd` là một trong các tên miền phụ miễn phí của **InfinityFree** — nhà cung cấp
-hosting PHP miễn phí, không cần thẻ ngân hàng. Kết quả cuối cùng: website chạy
-tại địa chỉ dạng `http://icandoit.rf.gd`, **có đủ trang quản trị nội dung và form
-đăng ký tư vấn**.
+**InfinityFree** là nhà cung cấp hosting PHP miễn phí (không cần thẻ ngân hàng),
+kèm tên miền phụ miễn phí với các đuôi **`.ct.ws`**, **`.rf.gd`**,
+**`.infinityfreeapp.com`**… Kết quả cuối cùng: website chạy tại địa chỉ dạng
+`http://icandoit.ct.ws`, **có đủ trang quản trị nội dung và form đăng ký tư vấn**.
 
 > Tên các nút trong bảng điều khiển có thể hơi khác theo từng thời điểm. Nếu không
 > thấy đúng chữ như dưới đây, tìm mục có ý nghĩa tương đương.
@@ -17,13 +17,14 @@ Thời gian làm: khoảng 45–60 phút, trong đó có 5–15 phút chờ kíc
 1. Mở **https://infinityfree.com** → bấm **Sign Up**, nhập email và mật khẩu.
 2. Mở hộp thư, bấm liên kết xác thực email.
 3. Đăng nhập, bấm **Create Account** (hoặc **New Hosting Account**).
-4. Chọn mục **Free Subdomain**, gõ tên muốn dùng rồi chọn đuôi **`rf.gd`**:
+4. Chọn mục **Free Subdomain**, gõ tên muốn dùng rồi chọn một đuôi có sẵn
+   (**`.ct.ws`**, `.rf.gd`, `.infinityfreeapp.com`…):
    - Gõ **một từ duy nhất**, không dấu, không khoảng trắng, không dấu chấm.
-   - Ví dụ: `icandoit` → địa chỉ sẽ là `icandoit.rf.gd`.
+   - Ví dụ: `icandoit` → địa chỉ sẽ là `icandoit.ct.ws`.
    - Nếu báo đã có người dùng, thử `icandoitenglish`, `icandoit-hn`…
 5. Đặt **mật khẩu cho tài khoản hosting** (khác mật khẩu đăng nhập ở bước 1) rồi
    bấm **Create Account**.
-6. Chờ 5–15 phút cho tên miền kích hoạt. Mở thử `http://icandoit.rf.gd`, thấy
+6. Chờ 5–15 phút cho tên miền kích hoạt. Mở thử `http://icandoit.ct.ws`, thấy
    trang mặc định của InfinityFree là đã xong.
 7. Vào **Account Details** và ghi lại (sẽ dùng ở các bước sau):
    - FTP hostname, FTP username, FTP password
@@ -59,6 +60,11 @@ php artisan icandoit:admin-sql quantri@icandoit.edu.vn "MatKhauRatManh2026"
 12. Vào thư mục **`htdocs`** và **xoá file `index2.html`** mặc định nếu có.
 13. Tải `release/icandoit-website.zip` lên, rồi bấm chuột phải vào file →
     **Extract** để giải nén ngay trong `htdocs`. Xoá file zip sau khi giải nén.
+
+    > File Manager trên trình duyệt thường **giới hạn dung lượng mỗi lần tải**
+    > (khoảng 10 MB). Nếu file zip lớn hơn, dùng **FileZilla** kết nối FTP bằng
+    > thông tin ở bước 7, kéo thả cả thư mục mã nguồn vào `htdocs` (chậm hơn
+    > nhưng chắc chắn được).
 14. Kiểm tra: trong `htdocs` phải thấy `.htaccess`, `artisan`, các thư mục `app`,
     `public`, `vendor`, `storage`…
 
@@ -76,7 +82,7 @@ APP_NAME="I CAN DO IT ENGLISH"
 APP_ENV=production
 APP_KEY=base64:...                     # dán chuỗi ở Phần 3 bước 2
 APP_DEBUG=false
-APP_URL=http://icandoit.rf.gd
+APP_URL=http://icandoit.ct.ws
 
 APP_LOCALE=vi
 APP_TIMEZONE=Asia/Ho_Chi_Minh
@@ -110,15 +116,15 @@ LOG_LEVEL=error
 
 ## Phần 7 · Chạy thử và hoàn thiện
 
-20. Mở `http://icandoit.rf.gd` — website hiện trang chủ.
-21. Vào `http://icandoit.rf.gd/login`, đăng nhập bằng email và mật khẩu ở Phần 3
+20. Mở `http://icandoit.ct.ws` — website hiện trang chủ.
+21. Vào `http://icandoit.ct.ws/login`, đăng nhập bằng email và mật khẩu ở Phần 3
     bước 3.
 22. Vào **Nội dung website** (`/admin/noi-dung`) điền thông tin thật: hotline,
     địa chỉ, học phí, giảng viên, lịch khai giảng.
 23. Thử gửi form đăng ký tư vấn ở trang chủ, rồi kiểm tra ở `/admin/consultations`.
 24. **Bật HTTPS miễn phí:** Control Panel → **SSL/TLS** (hoặc *Free SSL
-    Certificates*) → tạo chứng chỉ cho `icandoit.rf.gd` → chờ cấp xong rồi sửa
-    `APP_URL` trong `.env` thành `https://icandoit.rf.gd`.
+    Certificates*) → tạo chứng chỉ cho `icandoit.ct.ws` → chờ cấp xong rồi sửa
+    `APP_URL` trong `.env` thành `https://icandoit.ct.ws`.
 
 ---
 
@@ -135,7 +141,8 @@ LOG_LEVEL=error
 
 ## Điều cần biết trước khi chọn rf.gd
 
-- Tên miền phụ miễn phí **không chuyển được** sang nhà cung cấp khác.
+- Tên miền phụ miễn phí (`.ct.ws`, `.rf.gd`…) **không chuyển được** sang nhà
+  cung cấp khác.
 - Tài khoản **bỏ không dùng lâu có thể bị xoá**; nên đăng nhập vài tháng một lần.
 - **Không có SSH và cron**: mỗi lần cập nhật mã nguồn phải tải lại file qua FTP,
   và khi có thay đổi cấu trúc cơ sở dữ liệu thì nhập lại file `.sql` tương ứng.

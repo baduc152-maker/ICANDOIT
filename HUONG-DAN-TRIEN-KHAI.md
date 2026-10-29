@@ -88,7 +88,7 @@ Nhà cung cấp miễn phí phổ biến còn nhận đăng ký (không cần th
 | **ByetHost** | PHP, MySQL | `ten-cua-ban.byethost.com` |
 
 > **Làm từng bước với InfinityFree + tên miền `.rf.gd`:** xem hướng dẫn chi tiết
-> trong [HUONG-DAN-TEN-MIEN-RF-GD.md](HUONG-DAN-TEN-MIEN-RF-GD.md).
+> trong [HUONG-DAN-INFINITYFREE.md](HUONG-DAN-INFINITYFREE.md).
 
 Các bước tóm tắt:
 

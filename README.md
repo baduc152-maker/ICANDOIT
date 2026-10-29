@@ -195,8 +195,8 @@ Driver được chọn tại `App\Providers\AppServiceProvider` dựa theo
 ## Đưa website lên mạng
 
 Muốn có địa chỉ miễn phí nhanh nhất: xem
-**[HUONG-DAN-TEN-MIEN-RF-GD.md](HUONG-DAN-TEN-MIEN-RF-GD.md)** — từng bước lấy
-tên miền `.rf.gd` và đưa website lên InfinityFree.
+**[HUONG-DAN-INFINITYFREE.md](HUONG-DAN-INFINITYFREE.md)** — từng bước lấy
+tên miền miễn phí (`.ct.ws`, `.rf.gd`…) và đưa website lên InfinityFree.
 
 Xem **[HUONG-DAN-TRIEN-KHAI.md](HUONG-DAN-TRIEN-KHAI.md)**: so sánh các cách
 triển khai miễn phí (máy sẵn có + Tailscale Funnel, hosting PHP miễn phí, VPS
