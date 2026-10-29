@@ -44,6 +44,28 @@ return [
         'messenger' => 'https://m.me/',
     ],
 
+    /*
+    | Liên kết sang các ứng dụng khác của trung tâm (giao bài tập, giao việc).
+    | Để trống 'url' thì liên kết tự động bị ẩn trên website, không hiện link chết.
+    | Dán đường dẫn thật tại đây hoặc trong trang quản trị, nhóm "Liên kết ứng dụng".
+    */
+    'apps' => [
+        [
+            'key' => 'homework',
+            'label' => 'Bài tập về nhà',
+            'url' => '',
+            'description' => 'Ứng dụng giao và nộp bài tập về nhà dành cho học viên.',
+            'audience' => 'public',
+        ],
+        [
+            'key' => 'management',
+            'label' => 'Quản trị trung tâm',
+            'url' => '',
+            'description' => 'Ứng dụng giao việc và quản lý công việc nội bộ của trung tâm.',
+            'audience' => 'internal',
+        ],
+    ],
+
     // Con số nổi bật hiển thị ở trang chủ.
     'stats' => [
         ['value' => '5.000+', 'label' => 'Học viên đã đồng hành'],

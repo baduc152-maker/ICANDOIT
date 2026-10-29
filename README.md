@@ -43,6 +43,7 @@ không cần đụng tới giao diện:
 |---------------|----------|
 | `brand` | Tên, slogan, mô tả, năm thành lập |
 | `contact` | Hotline, email, địa chỉ, giờ làm việc, Facebook/YouTube/Zalo |
+| `apps` | Liên kết sang app giao bài tập và app giao việc |
 | `stats`, `values`, `roadmap` | Con số nổi bật, giá trị khác biệt, quy trình đào tạo |
 | `courses` | Danh sách khoá học (slug, mục tiêu, thời lượng, đầu ra, chương trình) |
 | `teachers`, `testimonials` | Hồ sơ giảng viên, cảm nhận học viên |
@@ -53,6 +54,21 @@ không cần đụng tới giao diện:
 > bằng thông tin thật của trung tâm trước khi đưa website lên môi trường thật —
 > nhanh nhất là sửa trực tiếp trong trang quản trị nội dung `/admin/noi-dung`.
 
+### Liên kết sang ứng dụng khác của trung tâm
+
+Website có sẵn chỗ nối sang các ứng dụng riêng của trung tâm:
+
+| Liên kết | Dành cho | Xuất hiện ở |
+|----------|----------|-------------|
+| **Bài tập về nhà** | Học viên, phụ huynh | Nút riêng trên thanh điều hướng, menu thu gọn trên điện thoại và chân trang |
+| **Quản trị trung tâm** | Nhân sự trung tâm | Thanh trên cùng của website, thanh điều hướng khu vực nội bộ và chân trang |
+
+- Đường dẫn khai báo trong `config/center.php` (khoá `apps`) hoặc sửa trực tiếp
+  trong trang quản trị, nhóm **Liên kết ứng dụng**.
+- **Để trống đường dẫn thì liên kết tự động bị ẩn**, website không hiện link chết.
+- Mỗi liên kết mở ở tab mới và có thể thêm bao nhiêu tuỳ ý (ví dụ thêm app thư
+  viện, app chấm bài) bằng nút *Thêm liên kết* trong trang quản trị.
+
 ### Trang quản trị nội dung (back-office)
 
 Toàn bộ nội dung website sửa được ngay trên trình duyệt tại **`/admin/noi-dung`**
@@ -61,6 +77,7 @@ Toàn bộ nội dung website sửa được ngay trên trình duyệt tại **`
 | Nhóm nội dung | Sửa được gì |
 |---------------|-------------|
 | Thương hiệu | Tên trung tâm, slogan, mô tả, năm thành lập, đường dẫn logo |
+| Liên kết ứng dụng | Đường dẫn app Bài tập về nhà và app Quản trị trung tâm |
 | Thông tin liên hệ | Hotline, email, địa chỉ, giờ làm việc, Facebook / YouTube / Zalo / Messenger |
 | Con số nổi bật · Giá trị khác biệt · Quy trình đào tạo | Thêm, sửa, xoá, đổi thứ tự từng mục |
 | Khoá học | Thêm khoá mới hoặc sửa khoá cũ: thông tin lớp, đối tượng, đầu ra, chương trình học |
@@ -188,7 +205,7 @@ app/
   Http/Controllers/        Auth, Dashboard, Attendance, Admin
   Http/Middleware/         EnsureUserIsAdmin
   Models/                  User, Attendance, Consultation, SiteContent
-  Support/                 Khai báo cấu trúc nội dung website (SiteContentSchema)
+  Support/                 Cấu trúc nội dung website, liên kết ứng dụng
   Services/
     AttendanceService.php  Nghiệp vụ check-in/out + đồng bộ
     SiteContentManager.php Đọc/ghi nội dung website do quản trị viên chỉnh sửa

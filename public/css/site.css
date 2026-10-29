@@ -161,18 +161,19 @@ ul { margin: 0 0 1rem; padding-left: 1.15rem; }
 .topbar a:hover { color: var(--gold); }
 .topbar__list { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
 
+.site-header .container { max-width: 1340px; }
 .header-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--header-h); }
 
-.brand { display: flex; align-items: center; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; flex: none; }
 .brand:hover { color: inherit; }
 .brand__mark { width: auto; height: 54px; flex: none; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand__name { font-weight: 800; font-size: 1rem; color: var(--red-600); letter-spacing: .01em; white-space: nowrap; }
 .brand__tagline { font-size: .77rem; color: var(--navy-700); font-weight: 500; white-space: nowrap; }
 
-.nav { display: flex; align-items: center; gap: 2px; }
+.nav { display: flex; flex: 1 1 auto; min-width: 0; align-items: center; justify-content: center; gap: 2px; }
 .nav a {
-    padding: 9px 12px;
+    padding: 9px 11px;
     border-radius: 999px;
     font-size: .93rem;
     font-weight: 600;
@@ -182,7 +183,11 @@ ul { margin: 0 0 1rem; padding-left: 1.15rem; }
 .nav a:hover { background: var(--navy-50); color: var(--navy-700); }
 .nav a.is-active { color: var(--red-600); background: var(--red-100); }
 
-.header-actions { display: flex; align-items: center; gap: 10px; }
+/* Liên kết sang ứng dụng khác: trên màn hình rộng đã có nút riêng ở header,
+   nên chỉ hiện trong menu thu gọn của điện thoại. */
+.nav__applink { display: none; color: var(--red-600); }
+
+.header-actions { display: flex; align-items: center; gap: 8px; flex: none; }
 
 .nav-toggle {
     display: none;
@@ -625,7 +630,7 @@ table.data tbody tr:hover { background: var(--navy-50); }
     .sticky-side { position: static; }
 }
 
-@media (max-width: 1160px) {
+@media (max-width: 1340px) {
     .nav-toggle { display: block; }
     .nav {
         position: absolute;
@@ -649,6 +654,7 @@ table.data tbody tr:hover { background: var(--navy-50); }
     .cta { grid-template-columns: 1fr; padding: 36px 28px; }
     .header-actions .btn--nav-cta { display: none; }
     .topbar__list li:not(:first-child) { display: none; }
+    .nav__applink { display: block; }
 }
 
 @media (max-width: 640px) {

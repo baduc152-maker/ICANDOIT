@@ -74,6 +74,24 @@ class SiteContentSchema
                 ],
             ],
 
+            'apps' => [
+                'label' => 'Liên kết ứng dụng',
+                'summary' => 'Đường dẫn sang app giao bài tập và app giao việc của trung tâm.',
+                'type' => 'list',
+                'item_label' => 'Liên kết',
+                'title_field' => 'label',
+                'fields' => [
+                    'key' => ['label' => 'Mã liên kết', 'type' => 'text', 'rules' => ['required', 'string', 'max:40', 'regex:/^[a-z0-9-]+$/'],
+                        'unique' => true, 'help' => 'Chữ thường không dấu, ví dụ: homework, management.'],
+                    'label' => ['label' => 'Tên hiển thị', 'type' => 'text', 'rules' => ['required', 'string', 'max:60']],
+                    'url' => ['label' => 'Đường dẫn ứng dụng', 'type' => 'text', 'rules' => ['nullable', 'url', 'max:255'],
+                        'help' => 'Dán link đầy đủ, ví dụ https://... Để trống thì liên kết được ẩn khỏi website.'],
+                    'audience' => ['label' => 'Dành cho', 'type' => 'select', 'rules' => ['required', 'string'],
+                        'options' => ['public' => 'Học viên, phụ huynh (hiện trên website)', 'internal' => 'Nhân sự trung tâm (khu vực nội bộ)']],
+                    'description' => ['label' => 'Mô tả ngắn', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                ],
+            ],
+
             'stats' => [
                 'label' => 'Con số nổi bật',
                 'summary' => 'Các con số hiển thị ở trang chủ và trang giới thiệu.',

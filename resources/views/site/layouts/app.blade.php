@@ -1,6 +1,10 @@
 @php
+    use App\Support\AppLink;
+
     $brand = config('center.brand');
     $contact = config('center.contact');
+    $studentApps = AppLink::for(AppLink::PUBLIC);
+    $staffApps = AppLink::for(AppLink::INTERNAL);
     $navItems = [
         ['route' => 'site.home', 'label' => 'Trang chủ'],
         ['route' => 'site.about', 'label' => 'Giới thiệu'],
@@ -66,6 +70,9 @@
             </ul>
             <ul class="topbar__list" style="list-style:none;margin:0;padding:0">
                 <li><a href="{{ route('login') }}">Khu vực nhân sự</a></li>
+                @foreach($staffApps as $app)
+                    <li><a href="{{ $app['url'] }}" target="_blank" rel="noopener">{{ $app['label'] }} ↗</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -85,9 +92,19 @@
                     <a href="{{ route($item['route']) }}"
                        class="{{ request()->routeIs($item['route']) || ($item['route'] === 'site.courses' && request()->routeIs('site.course')) || ($item['route'] === 'site.posts' && request()->routeIs('site.post')) ? 'is-active' : '' }}">{{ $item['label'] }}</a>
                 @endforeach
+
+                {{-- Liên kết sang ứng dụng của trung tâm: chỉ hiện trong menu thu gọn, --}}
+                {{-- vì trên màn hình rộng chúng đã là nút riêng cạnh nút đăng ký. --}}
+                @foreach($studentApps as $app)
+                    <a class="nav__applink" href="{{ $app['url'] }}" target="_blank" rel="noopener">{{ $app['label'] }} ↗</a>
+                @endforeach
             </nav>
 
             <div class="header-actions">
+                @foreach($studentApps as $app)
+                    <a class="btn btn--ghost btn--sm btn--nav-cta" href="{{ $app['url'] }}" target="_blank" rel="noopener"
+                       title="{{ $app['description'] }}">{{ $app['label'] }}</a>
+                @endforeach
                 <a class="btn btn--primary btn--sm btn--nav-cta" href="{{ route('site.contact') }}#dang-ky">Đăng ký tư vấn</a>
                 <button class="nav-toggle" type="button" data-nav-toggle aria-label="Mở menu" aria-expanded="false"><span></span></button>
             </div>
@@ -153,6 +170,9 @@
                     <li><a href="{{ route('site.schedule') }}">Lịch khai giảng</a></li>
                     <li><a href="{{ route('site.posts') }}">Cẩm nang học thuật</a></li>
                     <li><a href="{{ route('site.contact') }}">Liên hệ &amp; tư vấn</a></li>
+                    @foreach($studentApps->merge($staffApps) as $app)
+                        <li><a href="{{ $app['url'] }}" target="_blank" rel="noopener">{{ $app['label'] }} ↗</a></li>
+                    @endforeach
                     <li><a href="{{ route('login') }}">Khu vực nhân sự</a></li>
                 </ul>
             </div>

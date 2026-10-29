@@ -28,6 +28,10 @@
                             <a href="{{ route('admin.content') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Nội dung website</a>
                         @endif
                         <a href="{{ route('site.home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Website</a>
+                        @foreach(\App\Support\AppLink::for(\App\Support\AppLink::INTERNAL) as $app)
+                            <a href="{{ $app['url'] }}" target="_blank" rel="noopener" title="{{ $app['description'] }}"
+                               class="rounded-md px-3 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-50">{{ $app['label'] }} ↗</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
