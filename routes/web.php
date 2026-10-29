@@ -3,12 +3,15 @@
 use App\Http\Controllers\Admin\AttendanceAdminController;
 use App\Http\Controllers\Admin\ConsultationAdminController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\TimetableController;
+use App\Http\Controllers\Admin\WorkTaskController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Site\ConsultationController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\SitemapController;
+use App\Http\Controllers\WorkScheduleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +53,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkin');
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkout');
     Route::get('/attendance/history', [AttendanceController::class, 'history'])->name('attendance.history');
+
+    // Lịch công việc: buổi dạy theo thời khoá biểu + công việc được giao.
+    Route::get('/lich-cong-viec', [WorkScheduleController::class, 'index'])->name('schedule');
+    Route::post('/lich-cong-viec/{task}/trang-thai', [WorkScheduleController::class, 'toggleTask'])->name('schedule.task.toggle');
 });
 
 // Khu vực quản trị (yêu cầu quyền admin).
@@ -63,6 +70,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/noi-dung/{section}', [ContentController::class, 'edit'])->name('content.edit');
     Route::put('/noi-dung/{section}', [ContentController::class, 'update'])->name('content.update');
     Route::post('/noi-dung/{section}/khoi-phuc', [ContentController::class, 'reset'])->name('content.reset');
+
+    // Thời khoá biểu.
+    Route::get('/thoi-khoa-bieu', [TimetableController::class, 'index'])->name('timetable');
+    Route::get('/thoi-khoa-bieu/them', [TimetableController::class, 'create'])->name('timetable.create');
+    Route::post('/thoi-khoa-bieu', [TimetableController::class, 'store'])->name('timetable.store');
+    Route::get('/thoi-khoa-bieu/{timetable}', [TimetableController::class, 'edit'])->name('timetable.edit');
+    Route::put('/thoi-khoa-bieu/{timetable}', [TimetableController::class, 'update'])->name('timetable.update');
+    Route::delete('/thoi-khoa-bieu/{timetable}', [TimetableController::class, 'destroy'])->name('timetable.destroy');
+
+    // Giao việc.
+    Route::get('/cong-viec', [WorkTaskController::class, 'index'])->name('tasks');
+    Route::get('/cong-viec/them', [WorkTaskController::class, 'create'])->name('tasks.create');
+    Route::post('/cong-viec', [WorkTaskController::class, 'store'])->name('tasks.store');
+    Route::get('/cong-viec/{task}', [WorkTaskController::class, 'edit'])->name('tasks.edit');
+    Route::put('/cong-viec/{task}', [WorkTaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/cong-viec/{task}', [WorkTaskController::class, 'destroy'])->name('tasks.destroy');
 
     Route::get('/consultations', [ConsultationAdminController::class, 'index'])->name('consultations');
     Route::get('/consultations/export', [ConsultationAdminController::class, 'export'])->name('consultations.export');

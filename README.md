@@ -114,6 +114,26 @@ Cách hoạt động:
 Ứng dụng được thiết kế để **kết nối phần mềm ICANDOIT** thông qua một lớp tích
 hợp (adapter) — chạy độc lập ngay cả khi ICANDOIT chưa cung cấp API.
 
+### Lịch công việc & thời khoá biểu
+
+Khu vực nội bộ có màn **lịch công việc theo tuần** tại `/lich-cong-viec`, gộp hai
+nguồn vào cùng một lịch:
+
+| Nguồn | Khai báo ở đâu | Hiển thị |
+|-------|----------------|----------|
+| **Buổi dạy** | `/admin/thoi-khoa-bieu` — lặp lại hằng tuần theo thứ, có khoảng ngày áp dụng | Thẻ màu xanh tím |
+| **Công việc được giao** | `/admin/cong-viec` — giao cho một người vào một ngày cụ thể | Thẻ màu xanh ngọc, đỏ nếu ưu tiên |
+
+Phân quyền xem:
+
+- **Quản trị viên**: xem lịch của *tất cả nhân sự*, lọc theo từng người, thêm và
+  sửa thời khoá biểu, giao việc cho bất kỳ ai.
+- **Nhân sự khác**: chỉ xem được lịch của chính mình — đổi tham số trên đường dẫn
+  cũng không xem được lịch người khác — và chỉ đánh dấu xong công việc của mình.
+
+Thao tác trên lịch: chuyển tuần trước / tuần này / tuần sau, đánh dấu công việc
+**Xong** hoặc trả về **Chưa xong**, ngày hôm nay được viền nổi bật.
+
 ### Tính năng
 
 - **Đăng nhập tài khoản** (nhân viên / quản trị viên).
@@ -231,11 +251,13 @@ php artisan test
 app/
   Http/Controllers/        Auth, Dashboard, Attendance, Admin
   Http/Middleware/         EnsureUserIsAdmin
-  Models/                  User, Attendance, Consultation, SiteContent
+  Models/                  User, Attendance, Consultation, SiteContent,
+                           TimetableEntry, WorkTask
   Support/                 Cấu trúc nội dung website, liên kết ứng dụng
   Services/
     AttendanceService.php  Nghiệp vụ check-in/out + đồng bộ
     SiteContentManager.php Đọc/ghi nội dung website do quản trị viên chỉnh sửa
+    WorkScheduleService.php Dựng lịch tuần từ thời khoá biểu + công việc được giao
     Icandoit/              Lớp tích hợp ICANDOIT (adapter)
 resources/views/site/      Giao diện website trung tâm (Blade + CSS thuần)
 resources/views/           Giao diện khu vực nội bộ (Blade + Tailwind CDN)

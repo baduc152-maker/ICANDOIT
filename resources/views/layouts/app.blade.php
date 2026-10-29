@@ -19,18 +19,21 @@
                         <img src="{{ asset(config('center.brand.logo_mark')) }}" alt="ICANDOIT" class="h-9 w-auto">
                         ICANDOIT
                     </a>
-                    <div class="hidden gap-1 sm:flex">
-                        <a href="{{ route('dashboard') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Điểm danh</a>
-                        <a href="{{ route('attendance.history') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Lịch sử</a>
+                    <div class="hidden flex-wrap gap-1 sm:flex">
+                        <a href="{{ route('dashboard') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Điểm danh</a>
+                        <a href="{{ route('attendance.history') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Lịch sử</a>
+                        <a href="{{ route('schedule') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Lịch công việc</a>
                         @if(auth()->user()->isAdmin())
-                            <a href="{{ route('admin.attendance') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Quản trị</a>
-                            <a href="{{ route('admin.consultations') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Đăng ký tư vấn</a>
-                            <a href="{{ route('admin.content') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Nội dung website</a>
+                            <a href="{{ route('admin.attendance') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Điểm danh chung</a>
+                            <a href="{{ route('admin.consultations') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Đăng ký tư vấn</a>
+                            <a href="{{ route('admin.timetable') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Thời khoá biểu</a>
+                            <a href="{{ route('admin.tasks') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Giao việc</a>
+                            <a href="{{ route('admin.content') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Nội dung</a>
                         @endif
-                        <a href="{{ route('site.home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Website</a>
+                        <a href="{{ route('site.home') }}" class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">Website</a>
                         @foreach(\App\Support\AppLink::for(\App\Support\AppLink::INTERNAL) as $app)
                             <a href="{{ $app['url'] }}" target="_blank" rel="noopener" title="{{ $app['description'] }}"
-                               class="rounded-md px-3 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-50">{{ $app['label'] }} ↗</a>
+                               class="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-50">{{ $app['label'] }} ↗</a>
                         @endforeach
                     </div>
                 </div>

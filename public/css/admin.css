@@ -45,6 +45,7 @@ textarea { resize: vertical; }
 .overflow-x-auto { overflow-x: auto; }
 .align-top { vertical-align: top; }
 .transition { transition: all .15s ease; }
+.whitespace-nowrap { white-space: nowrap; }
 .backdrop-blur { backdrop-filter: blur(8px); }
 .opacity-30 { opacity: .3; }
 
@@ -145,6 +146,24 @@ textarea { resize: vertical; }
 .focus\:ring-rose-500:focus { box-shadow: 0 0 0 1px #f43f5e; }
 input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: #4f46e5; }
 
+/* ------------------------------------------- Lịch công việc theo tuần */
+.day-column { display: flex; flex-direction: column; min-height: 120px; }
+.day-today { outline: 2px solid #4f46e5; outline-offset: -1px; }
+.item-card {
+    border-radius: .5rem;
+    padding: .55rem .6rem;
+    border-left: 3px solid #cbd5e1;
+    background: #f8fafc;
+}
+.item-class { border-left-color: #4f46e5; background: #eef2ff; }
+.item-task { border-left-color: #0d9488; background: #f0fdfa; }
+.item-high { border-left-color: #e11d48; background: #fff1f2; }
+.item-done { opacity: .6; }
+.item-done .text-slate-800 { text-decoration: line-through; }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.legend-class { background: #4f46e5; }
+.legend-task { background: #0d9488; }
+
 /* ------------------------------------------------------ Responsive */
 @media (min-width: 640px) {
     .sm\:block { display: block; }
@@ -157,5 +176,6 @@ input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: #4f46e5; }
 
 @media (min-width: 1024px) {
     .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
     .lg\:col-span-2 { grid-column: span 2 / span 2; }
 }
