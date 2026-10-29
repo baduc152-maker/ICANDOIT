@@ -147,6 +147,26 @@ LOG_LEVEL=error
 | Báo lỗi ghi file trong `storage` | Đặt lại quyền thư mục `storage` và `bootstrap/cache`. |
 | Vẫn hiện trang mặc định của InfinityFree | Chưa xoá `index2.html` trong `htdocs`, hoặc tên miền chưa kích hoạt xong. |
 
+## Dùng tên miền đã mua ở nơi khác (Weebly/Square, Tenten, iNET…)
+
+Website chạy trên InfinityFree vẫn gắn được tên miền riêng mua ở bất kỳ đâu:
+
+1. Trong tài khoản InfinityFree, mở hosting account → **Addon Domains** (hoặc
+   *Parked Domains*) → nhập tên miền, ví dụ `icandoit.com` → **Add Domain**.
+2. Màn hình sẽ hiện **hai dòng nameserver** của chính tài khoản đó. Chép đúng
+   hai dòng đang hiển thị (đừng dùng giá trị chép ở tài liệu khác, vì mỗi nhóm
+   máy chủ một khác).
+3. Đăng nhập nơi quản lý tên miền (Weebly/Square, Tenten, iNET…) → mục
+   **Nameservers / DNS** → chọn *Custom nameservers* → dán hai dòng ở bước 2 →
+   lưu lại.
+4. Chờ DNS cập nhật (thường 15 phút – vài giờ, tối đa 48 giờ), rồi quay lại
+   InfinityFree bật **SSL/TLS** cho tên miền mới.
+5. Sửa `APP_URL` trong file `.env` thành địa chỉ mới, ví dụ
+   `https://icandoit.com`.
+
+> Tên miền phụ miễn phí do nhà cung cấp cấp (`*.weebly.com`, `*.ct.ws`) **không**
+> trỏ đi nơi khác được — chỉ tên miền tự mua mới làm được bước này.
+
 ## Điều cần biết trước khi chọn rf.gd
 
 - Tên miền phụ miễn phí (`.ct.ws`, `.rf.gd`…) **không chuyển được** sang nhà
