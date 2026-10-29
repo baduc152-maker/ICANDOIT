@@ -62,9 +62,17 @@ php artisan icandoit:admin-sql quantri@icandoit.edu.vn "MatKhauRatManh2026"
     **Extract** để giải nén ngay trong `htdocs`. Xoá file zip sau khi giải nén.
 
     > File Manager trên trình duyệt thường **giới hạn dung lượng mỗi lần tải**
-    > (khoảng 10 MB). Nếu file zip lớn hơn, dùng **FileZilla** kết nối FTP bằng
-    > thông tin ở bước 7, kéo thả cả thư mục mã nguồn vào `htdocs` (chậm hơn
-    > nhưng chắc chắn được).
+    > (khoảng 10 MB), trong khi gói mã nguồn khoảng 20 MB. Hai cách xử lý:
+    >
+    > **Cách 1 (nhanh, khuyến nghị):** dùng **FileZilla** tải *hai file* vào
+    > `htdocs`: `icandoit-website.zip` và `scripts/giai-nen.php`. Mở file
+    > `scripts/giai-nen.php` trước khi tải lên, đổi chuỗi `TOKEN` thành một chuỗi
+    > ngẫu nhiên của mình. Sau đó mở trình duyệt vào
+    > `http://icandoit.ct.ws/giai-nen.php?token=CHUOI-CUA-BAN` — trang tự giải nén
+    > theo từng đợt, xong sẽ **tự xoá cả file nén lẫn chính nó**.
+    >
+    > **Cách 2:** dùng FileZilla kéo thả toàn bộ thư mục mã nguồn vào `htdocs`
+    > (gần 13.000 tệp nên rất chậm, có thể vài giờ).
 14. Kiểm tra: trong `htdocs` phải thấy `.htaccess`, `artisan`, các thư mục `app`,
     `public`, `vendor`, `storage`…
 
