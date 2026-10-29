@@ -53,7 +53,7 @@ return [
         [
             'key' => 'homework',
             'label' => 'Bài tập về nhà',
-            'url' => '',
+            'url' => 'https://ducnguyen.tailce49e0.ts.net/baitap/',
             'description' => 'Ứng dụng giao và nộp bài tập về nhà dành cho học viên.',
             'audience' => 'public',
         ],

@@ -37,10 +37,25 @@ class AppLinkTest extends TestCase
 
     public function test_links_are_hidden_until_an_address_is_set(): void
     {
+        $empty = array_map(fn ($link) => ['url' => ''] + $link, $this->links());
+        app(SiteContentManager::class)->save('apps', $empty);
+
         $this->get(route('site.home'))
             ->assertOk()
             ->assertDontSee('Bài tập về nhà')
             ->assertDontSee('Quản trị trung tâm');
+    }
+
+    public function test_default_configuration_links_to_the_homework_app(): void
+    {
+        $homework = collect(config('center.apps'))->firstWhere('key', 'homework');
+
+        $this->assertSame('https://ducnguyen.tailce49e0.ts.net/baitap/', $homework['url']);
+
+        $this->get(route('site.home'))
+            ->assertOk()
+            ->assertSee('Bài tập về nhà')
+            ->assertSee('https://ducnguyen.tailce49e0.ts.net/baitap/', false);
     }
 
     public function test_student_link_appears_on_the_website(): void
