@@ -24,11 +24,11 @@ return [
             .'và tiếng Anh nền tảng cho học sinh – sinh viên, với lộ trình cá nhân hoá và cam kết đầu ra.',
         'founded' => 2016,
 
-        // Đường dẫn logo trong thư mục public/. Muốn dùng file gốc của trung tâm,
-        // chỉ cần chép ảnh vào public/images/ rồi đổi hai giá trị dưới đây.
-        'logo_mark' => 'images/logo-mark.svg',   // chỉ biểu tượng (header, favicon)
-        'logo_full' => 'images/logo.svg',        // logo đầy đủ kèm chữ
-        'logo_light' => 'images/logo-mark-light.svg', // biểu tượng cho nền tối (footer)
+        // Đường dẫn logo trong thư mục public/. Muốn đổi logo, chép ảnh mới vào
+        // public/images/ rồi sửa ba giá trị dưới đây (hoặc sửa trong trang quản trị).
+        'logo_mark' => 'images/logo-mark.png',   // chỉ biểu tượng (header, favicon)
+        'logo_full' => 'images/logo.jpg',        // logo đầy đủ kèm chữ (ảnh gốc)
+        'logo_light' => 'images/logo-mark.png',  // biểu tượng dùng trên nền tối (footer)
     ],
 
     'contact' => [

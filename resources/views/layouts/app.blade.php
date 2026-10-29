@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Điểm danh từ xa') · ICANDOIT</title>
-    <link rel="icon" href="{{ asset(config('center.brand.logo_mark')) }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset(config('center.brand.logo_mark')) }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 </head>
 <body class="h-full text-slate-800">

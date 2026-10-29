@@ -47,7 +47,7 @@ class SiteContentSchema
                         'help' => 'Dùng cho phần mở đầu trang chủ, chân trang và thẻ mô tả SEO.'],
                     'founded' => ['label' => 'Năm thành lập', 'type' => 'number', 'rules' => ['required', 'integer', 'min:1900', 'max:2100']],
                     'logo_mark' => ['label' => 'Logo biểu tượng', 'type' => 'text', 'rules' => ['required', 'string', 'max:200'],
-                        'help' => 'Đường dẫn tính từ thư mục public/, ví dụ images/logo-mark.svg'],
+                        'help' => 'Đường dẫn tính từ thư mục public/, ví dụ images/logo-mark.png'],
                     'logo_full' => ['label' => 'Logo đầy đủ', 'type' => 'text', 'rules' => ['required', 'string', 'max:200']],
                     'logo_light' => ['label' => 'Logo cho nền tối', 'type' => 'text', 'rules' => ['required', 'string', 'max:200']],
                 ],

@@ -573,7 +573,13 @@ table.data tbody tr:hover { background: var(--navy-50); }
 .site-footer a:hover { color: var(--gold); }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: .93rem; }
 .footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.footer-brand svg, .footer-brand img { width: 54px; }
+/* Logo trên nền tối đặt trong ô trắng để giữ đúng màu gốc của logo. */
+.footer-brand img {
+    width: 58px; height: auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 6px 7px;
+}
 .footer-brand strong { color: #fff; font-size: 1.05rem; display: block; }
 .footer-brand span { font-size: .82rem; }
 .footer-desc { font-size: .93rem; max-width: 34em; }

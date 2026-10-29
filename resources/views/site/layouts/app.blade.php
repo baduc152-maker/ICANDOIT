@@ -30,7 +30,7 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="icon" href="{{ asset($brand['logo_mark']) }}" type="image/svg+xml">
+    <link rel="icon" href="{{ asset($brand['logo_mark']) }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=be-vietnam-pro:400,500,600,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">

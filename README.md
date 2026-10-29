@@ -27,8 +27,9 @@ gồm hai phần chạy chung một ứng dụng Laravel:
 
 ### Nhận diện thương hiệu
 
-- Logo được dựng lại dạng vector: `public/images/logo.svg` (đầy đủ chữ) và
-  `public/images/logo-mark.svg` (chỉ biểu tượng, dùng cho header/favicon).
+- Logo dùng đúng ảnh gốc của trung tâm: `public/images/logo.jpg` (logo đầy đủ
+  kèm chữ) và `public/images/logo-mark.png` (phần biểu tượng cắt ra từ ảnh gốc,
+  nền trong suốt, dùng cho header, favicon và chân trang).
 - Bảng màu lấy từ logo: xanh navy học thuật `#1b3a73`, đỏ nhấn `#e1232b`, nền trắng.
 - Giao diện viết bằng CSS thuần tại `public/css/site.css` (không cần bước build),
   responsive từ điện thoại đến màn hình lớn, kèm hiệu ứng xuất hiện khi cuộn trang.
