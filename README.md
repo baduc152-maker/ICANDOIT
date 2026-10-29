@@ -214,6 +214,10 @@ Driver được chọn tại `App\Providers\AppServiceProvider` dựa theo
 
 ## Đưa website lên mạng
 
+Sau khi tải mã nguồn lên máy chủ, mở **`/cai-dat`** trên trình duyệt: trang cài
+đặt sẽ hỏi thông tin cơ sở dữ liệu và tài khoản quản trị, tự ghi file `.env`, tạo
+toàn bộ bảng dữ liệu rồi tự khoá lại. Không cần SSH, không cần chạy lệnh nào.
+
 Muốn có địa chỉ miễn phí nhanh nhất: xem
 **[HUONG-DAN-INFINITYFREE.md](HUONG-DAN-INFINITYFREE.md)** — từng bước lấy
 tên miền miễn phí (`.ct.ws`, `.rf.gd`…) và đưa website lên InfinityFree.

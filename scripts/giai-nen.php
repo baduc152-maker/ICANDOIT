@@ -63,9 +63,9 @@ if ($end < $total) {
     @unlink(__FILE__);
     echo "<p>✅ Đã giải nén xong <strong>{$total}</strong> tệp.</p>";
     echo '<p>File nén và công cụ này đã được xoá để bảo mật.</p>';
-    echo '<p>Bước tiếp theo: sửa thông tin cơ sở dữ liệu trong file <code>.env</code>, ';
-    echo 'nhập <code>database/schema/mysql-schema.sql</code> bằng phpMyAdmin, rồi mở trang chủ.</p>';
-    echo '<p><a href="/">Mở website</a></p>';
+    echo '<p>Bước tiếp theo: mở trang cài đặt để nhập thông tin cơ sở dữ liệu và ';
+    echo 'tạo tài khoản quản trị. Hệ thống sẽ tự tạo bảng dữ liệu.</p>';
+    echo '<p><a href="/cai-dat">👉 Mở trang cài đặt</a></p>';
 }
 
 echo '</body></html>';

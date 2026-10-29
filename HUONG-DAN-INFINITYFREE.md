@@ -38,20 +38,13 @@ Thời gian làm: khoảng 45–60 phút, trong đó có 5–15 phút chờ kíc
     `if0_12345678_icandoit`. Mật khẩu database chính là **mật khẩu tài khoản
     hosting** ở bước 5.
 
-## Phần 3 · Chuẩn bị ở máy mình
+## Phần 3 · Chuẩn bị gói cài đặt
 
-Mở cửa sổ dòng lệnh trong thư mục mã nguồn website:
+Tải gói `icandoit-website.zip` đã đóng sẵn (hoặc tự tạo bằng
+`bash scripts/build-release.sh` nếu máy đã cài PHP và Composer).
 
-```bash
-# 1. Đóng gói mã nguồn thành file zip
-bash scripts/build-release.sh          # tạo release/icandoit-website.zip
-
-# 2. Sinh khoá bảo mật cho ứng dụng — ghi lại cả dòng base64:...
-php artisan key:generate --show
-
-# 3. Sinh câu lệnh SQL tạo tài khoản quản trị — ghi lại cả câu INSERT
-php artisan icandoit:admin-sql quantri@icandoit.edu.vn "MatKhauRatManh2026"
-```
+Không cần chạy lệnh nào khác: khoá bảo mật, cấu hình cơ sở dữ liệu và tài khoản
+quản trị sẽ được tạo ở **Phần 5** ngay trên trình duyệt.
 
 ## Phần 4 · Tải mã nguồn lên hosting
 
@@ -80,57 +73,33 @@ php artisan icandoit:admin-sql quantri@icandoit.edu.vn "MatKhauRatManh2026"
     > chuyển mọi yêu cầu vào thư mục `public/` của Laravel. Nếu File Manager ẩn
     > các file bắt đầu bằng dấu chấm, bật **Show hidden files**.
 
-## Phần 5 · Tạo file cấu hình `.env`
+## Phần 5 · Chạy trang cài đặt
 
-15. Trong `htdocs`, tạo file mới tên **`.env`** (cùng cấp với `artisan`) và dán
-    nội dung sau, thay các giá trị in đậm bằng thông tin của mình:
+15. Mở trình duyệt vào **`http://icandoit.ct.ws/cai-dat`**.
+16. Điền ba nhóm thông tin trên một trang duy nhất:
+    - **Cơ sở dữ liệu** — dán máy chủ, tên database, tên đăng nhập và mật khẩu
+      lấy ở Phần 2 (mật khẩu database chính là mật khẩu tài khoản hosting).
+    - **Tài khoản quản trị** — email và mật khẩu tự chọn để đăng nhập website.
+    - **Thông tin website** — tên trung tâm và địa chỉ (đã điền sẵn).
+17. Bấm **Cài đặt website**. Hệ thống tự ghi file cấu hình, tạo toàn bộ bảng dữ
+    liệu và tạo tài khoản quản trị, mất khoảng 10–30 giây.
+18. Cài xong, trang này **tự khoá lại** (mở lại sẽ báo không tìm thấy) để không
+    ai chạy lại được.
 
-```dotenv
-APP_NAME="I CAN DO IT ENGLISH"
-APP_ENV=production
-APP_KEY=base64:...                     # dán chuỗi ở Phần 3 bước 2
-APP_DEBUG=false
-APP_URL=http://icandoit.ct.ws
-
-APP_LOCALE=vi
-APP_TIMEZONE=Asia/Ho_Chi_Minh
-
-DB_CONNECTION=mysql
-DB_HOST=sqlxxx.infinityfree.com        # MySQL hostname ở bước 7
-DB_PORT=3306
-DB_DATABASE=if0_12345678_icandoit
-DB_USERNAME=if0_12345678
-DB_PASSWORD=                           # mật khẩu tài khoản hosting ở bước 5
-
-SESSION_DRIVER=file
-CACHE_STORE=file
-QUEUE_CONNECTION=sync
-LOG_CHANNEL=stack
-LOG_LEVEL=error
-```
-
-16. Kiểm tra hai thư mục `storage` và `bootstrap/cache` có quyền ghi (nếu website
-    báo lỗi ghi file, đặt quyền `755`, cần thiết thì `777`).
-
-## Phần 6 · Nhập cấu trúc cơ sở dữ liệu
-
-17. Control Panel → **phpMyAdmin** → chọn database vừa tạo.
-18. Tab **Import** → **Choose File** → chọn file `database/schema/mysql-schema.sql`
-    trong mã nguồn ở máy mình → bấm **Go/Import**.
-    Sau khi xong sẽ thấy các bảng `users`, `consultations`, `site_contents`,
-    `attendances`…
-19. Tab **SQL** → dán **câu INSERT** sinh ở Phần 3 bước 3 → bấm **Go**.
-    Đây là tài khoản quản trị để đăng nhập website.
+> **Cách thủ công (chỉ dùng khi trang cài đặt báo lỗi):** tạo file `.env` theo mẫu
+> trong `.env.example`, nhập `database/schema/mysql-schema.sql` bằng phpMyAdmin,
+> rồi tạo tài khoản quản trị bằng câu lệnh sinh từ
+> `php artisan icandoit:admin-sql email@cua-ban "MatKhau"`.
 
 ## Phần 7 · Chạy thử và hoàn thiện
 
-20. Mở `http://icandoit.ct.ws` — website hiện trang chủ.
-21. Vào `http://icandoit.ct.ws/login`, đăng nhập bằng email và mật khẩu ở Phần 3
-    bước 3.
-22. Vào **Nội dung website** (`/admin/noi-dung`) điền thông tin thật: hotline,
-    địa chỉ, học phí, giảng viên, lịch khai giảng.
-23. Thử gửi form đăng ký tư vấn ở trang chủ, rồi kiểm tra ở `/admin/consultations`.
-24. **Bật HTTPS miễn phí:** Control Panel → **SSL/TLS** (hoặc *Free SSL
+19. Mở `http://icandoit.ct.ws` — website hiện trang chủ.
+20. Vào `http://icandoit.ct.ws/login`, đăng nhập bằng email và mật khẩu vừa đặt
+    ở Phần 5.
+21. Vào **Nội dung** (`/admin/noi-dung`) điền thông tin thật: hotline, địa chỉ,
+    học phí, giảng viên, lịch khai giảng.
+22. Thử gửi form đăng ký tư vấn ở trang chủ, rồi kiểm tra ở `/admin/consultations`.
+23. **Bật HTTPS miễn phí:** Control Panel → **SSL/TLS** (hoặc *Free SSL
     Certificates*) → tạo chứng chỉ cho `icandoit.ct.ws` → chờ cấp xong rồi sửa
     `APP_URL` trong `.env` thành `https://icandoit.ct.ws`.
 
@@ -140,9 +109,10 @@ LOG_LEVEL=error
 
 | Hiện tượng | Cách xử lý |
 |------------|------------|
-| Lỗi 500 ngay trang chủ | Thiếu `APP_KEY` hoặc sai cú pháp `.env`. Tạm đặt `APP_DEBUG=true` để xem thông báo, sửa xong nhớ đặt lại `false`. |
-| Báo *No application encryption key* | Chưa dán `APP_KEY=base64:...` vào `.env`. |
-| Báo lỗi kết nối cơ sở dữ liệu | Sai `DB_HOST`/`DB_DATABASE`/`DB_USERNAME`; mật khẩu database là mật khẩu tài khoản hosting. |
+| Mở `/cai-dat` báo *Not Found* | Website đã cài xong rồi (trang tự khoá). Vào thẳng `/login`. |
+| Trang cài đặt báo không kết nối được cơ sở dữ liệu | Sai máy chủ, tên database hoặc tên đăng nhập; mật khẩu database là mật khẩu tài khoản hosting. |
+| Trang cài đặt báo không ghi được file `.env` | Đặt quyền ghi (chmod 755) cho thư mục gốc chứa website rồi tải lại trang. |
+| Lỗi 500 ngay trang chủ | Thiếu file `.env`. Chạy lại trang `/cai-dat`. |
 | Trang trắng hoặc hiện mã PHP | Chưa giải nén đúng vào `htdocs`, hoặc thiếu file `.htaccess` ở thư mục gốc. |
 | Báo lỗi ghi file trong `storage` | Đặt lại quyền thư mục `storage` và `bootstrap/cache`. |
 | Vẫn hiện trang mặc định của InfinityFree | Chưa xoá `index2.html` trong `htdocs`, hoặc tên miền chưa kích hoạt xong. |

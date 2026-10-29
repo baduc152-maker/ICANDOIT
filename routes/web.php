@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\WorkTaskController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InstallController;
 use App\Http\Controllers\Site\ConsultationController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\SitemapController;
@@ -34,6 +35,14 @@ Route::get('/sitemap.xml', SitemapController::class)->name('site.sitemap');
 Route::post('/dang-ky-tu-van', [ConsultationController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('site.consult');
+
+/*
+|--------------------------------------------------------------------------
+| Trang cài đặt một lần (tự khoá sau khi cài xong)
+|--------------------------------------------------------------------------
+*/
+Route::get('/cai-dat', [InstallController::class, 'show'])->name('install');
+Route::post('/cai-dat', [InstallController::class, 'store'])->name('install.store');
 
 /*
 |--------------------------------------------------------------------------
