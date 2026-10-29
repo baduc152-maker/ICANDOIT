@@ -192,6 +192,22 @@ Driver được chọn tại `App\Providers\AppServiceProvider` dựa theo
 | `WORK_START_TIME`      | Giờ vào chuẩn (HH:MM), sau mốc này là muộn | `08:30`           |
 | `ATTENDANCE_TIMEZONE`  | Múi giờ chấm công                          | `Asia/Ho_Chi_Minh`|
 
+## Đưa website lên mạng
+
+Xem **[HUONG-DAN-TRIEN-KHAI.md](HUONG-DAN-TRIEN-KHAI.md)**: so sánh các cách
+triển khai miễn phí (máy sẵn có + Tailscale Funnel, hosting PHP miễn phí, VPS
+giá rẻ, bản tĩnh), cách lấy tên miền miễn phí `.id.vn` và việc cần làm sau khi
+website lên mạng.
+
+Đóng gói mã nguồn để tải lên hosting:
+
+```bash
+bash scripts/build-release.sh        # tạo release/icandoit-website.zip
+```
+
+File `.htaccess` ở thư mục gốc giúp hosting chia sẻ (không đổi được thư mục gốc)
+chạy được Laravel mà không cần cấu hình thêm.
+
 ## Kiểm thử
 
 ```bash
