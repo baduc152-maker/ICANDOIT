@@ -194,6 +194,10 @@ Driver được chọn tại `App\Providers\AppServiceProvider` dựa theo
 
 ## Đưa website lên mạng
 
+Muốn có địa chỉ miễn phí nhanh nhất: xem
+**[HUONG-DAN-TEN-MIEN-RF-GD.md](HUONG-DAN-TEN-MIEN-RF-GD.md)** — từng bước lấy
+tên miền `.rf.gd` và đưa website lên InfinityFree.
+
 Xem **[HUONG-DAN-TRIEN-KHAI.md](HUONG-DAN-TRIEN-KHAI.md)**: so sánh các cách
 triển khai miễn phí (máy sẵn có + Tailscale Funnel, hosting PHP miễn phí, VPS
 giá rẻ, bản tĩnh), cách lấy tên miền miễn phí `.id.vn` và việc cần làm sau khi
@@ -207,6 +211,13 @@ bash scripts/build-release.sh        # tạo release/icandoit-website.zip
 
 File `.htaccess` ở thư mục gốc giúp hosting chia sẻ (không đổi được thư mục gốc)
 chạy được Laravel mà không cần cấu hình thêm.
+
+Hai công cụ dành cho hosting không có SSH:
+
+| Lệnh / file | Dùng để |
+|-------------|---------|
+| `database/schema/mysql-schema.sql` | Nhập cấu trúc cơ sở dữ liệu bằng phpMyAdmin |
+| `php artisan icandoit:admin-sql <email> "<mật khẩu>"` | Sinh câu lệnh SQL tạo tài khoản quản trị |
 
 ## Kiểm thử
 

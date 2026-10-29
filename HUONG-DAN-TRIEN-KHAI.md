@@ -87,7 +87,10 @@ Nhà cung cấp miễn phí phổ biến còn nhận đăng ký (không cần th
 | **AwardSpace** | PHP, MySQL, 1GB | `ten-cua-ban.atwebpages.com` |
 | **ByetHost** | PHP, MySQL | `ten-cua-ban.byethost.com` |
 
-Các bước:
+> **Làm từng bước với InfinityFree + tên miền `.rf.gd`:** xem hướng dẫn chi tiết
+> trong [HUONG-DAN-TEN-MIEN-RF-GD.md](HUONG-DAN-TEN-MIEN-RF-GD.md).
+
+Các bước tóm tắt:
 
 1. Đăng ký tài khoản (cần xác thực email), tạo một "hosting account" và chọn tên
    miền phụ miễn phí.
@@ -119,11 +122,12 @@ Các bước:
    CACHE_STORE=file
    ```
 6. Tạo bảng dữ liệu: hosting miễn phí **không có SSH** nên không chạy được
-   `php artisan migrate`. Thay vào đó:
-   - Ở máy mình, chạy `php artisan migrate --force` với cùng cấu hình MySQL (nếu
-     nhà cung cấp cho kết nối từ xa), **hoặc**
-   - Chạy migrate trên một MySQL ở máy mình, xuất file `.sql`, rồi dùng
-     **phpMyAdmin** trong control panel để nhập vào database trên hosting.
+   `php artisan migrate`. Dùng **phpMyAdmin** trong control panel, tab *Import*,
+   nhập sẵn file `database/schema/mysql-schema.sql` có trong mã nguồn.
+   Sau đó tạo tài khoản quản trị bằng câu lệnh SQL sinh từ:
+   ```bash
+   php artisan icandoit:admin-sql email@cua-ban "MatKhauManh"
+   ```
 7. Mở website, đăng nhập `/login` và **đổi ngay mật khẩu tài khoản quản trị**.
 
 > Hạn chế của hosting miễn phí: không có SSH và cron, giới hạn lượt truy cập mỗi
