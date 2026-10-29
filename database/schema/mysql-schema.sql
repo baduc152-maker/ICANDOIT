@@ -58,6 +58,22 @@ alter table `consultations` add index `consultations_created_at_index`(`created_
 create table `site_contents` (`id` bigint unsigned not null auto_increment primary key, `section` varchar(255) not null, `payload` json not null, `updated_by` bigint unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
 alter table `site_contents` add constraint `site_contents_updated_by_foreign` foreign key (`updated_by`) references `users` (`id`) on delete set null;
 alter table `site_contents` add unique `site_contents_section_unique`(`section`);
+-- ---------------------------------------------------------------
+-- 2026_03_01_000010_create_timetable_entries_table.php
+-- ---------------------------------------------------------------
+create table `timetable_entries` (`id` bigint unsigned not null auto_increment primary key, `user_id` bigint unsigned not null, `class_name` varchar(255) not null, `subject` varchar(255) null, `weekday` tinyint unsigned not null, `start_time` time not null, `end_time` time not null, `room` varchar(255) null, `effective_from` date not null, `effective_to` date null, `note` text null, `is_active` tinyint(1) not null default '1', `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
+alter table `timetable_entries` add constraint `timetable_entries_user_id_foreign` foreign key (`user_id`) references `users` (`id`) on delete cascade;
+alter table `timetable_entries` add index `timetable_entries_user_id_weekday_index`(`user_id`, `weekday`);
+alter table `timetable_entries` add index `timetable_entries_weekday_index`(`weekday`);
+-- ---------------------------------------------------------------
+-- 2026_03_01_000020_create_work_tasks_table.php
+-- ---------------------------------------------------------------
+create table `work_tasks` (`id` bigint unsigned not null auto_increment primary key, `user_id` bigint unsigned not null, `assigned_by` bigint unsigned null, `title` varchar(255) not null, `description` text null, `work_date` date not null, `start_time` time null, `end_time` time null, `priority` varchar(255) not null default 'normal', `status` varchar(255) not null default 'todo', `completed_at` timestamp null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
+alter table `work_tasks` add constraint `work_tasks_user_id_foreign` foreign key (`user_id`) references `users` (`id`) on delete cascade;
+alter table `work_tasks` add constraint `work_tasks_assigned_by_foreign` foreign key (`assigned_by`) references `users` (`id`) on delete set null;
+alter table `work_tasks` add index `work_tasks_user_id_work_date_index`(`user_id`, `work_date`);
+alter table `work_tasks` add index `work_tasks_work_date_index`(`work_date`);
+alter table `work_tasks` add index `work_tasks_status_index`(`status`);
 
 -- ---------------------------------------------------------------
 -- Bảng theo dõi migration
@@ -70,5 +86,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_01_01_000010_add_a
 INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_01_01_000020_create_attendances_table', 1);
 INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_02_01_000010_create_consultations_table', 1);
 INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_02_01_000020_create_site_contents_table', 1);
+INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_03_01_000010_create_timetable_entries_table', 1);
+INSERT INTO `migrations` (`migration`, `batch`) VALUES ('2026_03_01_000020_create_work_tasks_table', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
