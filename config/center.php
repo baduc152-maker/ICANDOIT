@@ -60,7 +60,7 @@ return [
         [
             'key' => 'management',
             'label' => 'Quản trị trung tâm',
-            'url' => '',
+            'url' => 'https://ducnguyen.tailce49e0.ts.net/baitap/',
             'description' => 'Ứng dụng giao việc và quản lý công việc nội bộ của trung tâm.',
             'audience' => 'internal',
         ],

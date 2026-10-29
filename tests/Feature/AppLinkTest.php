@@ -46,15 +46,17 @@ class AppLinkTest extends TestCase
             ->assertDontSee('Quản trị trung tâm');
     }
 
-    public function test_default_configuration_links_to_the_homework_app(): void
+    public function test_default_configuration_points_at_the_centre_apps(): void
     {
-        $homework = collect(config('center.apps'))->firstWhere('key', 'homework');
+        $apps = collect(config('center.apps'));
 
-        $this->assertSame('https://ducnguyen.tailce49e0.ts.net/baitap/', $homework['url']);
+        $this->assertSame('https://ducnguyen.tailce49e0.ts.net/baitap/', $apps->firstWhere('key', 'homework')['url']);
+        $this->assertSame('https://ducnguyen.tailce49e0.ts.net/baitap/', $apps->firstWhere('key', 'management')['url']);
 
         $this->get(route('site.home'))
             ->assertOk()
             ->assertSee('Bài tập về nhà')
+            ->assertSee('Quản trị trung tâm')
             ->assertSee('https://ducnguyen.tailce49e0.ts.net/baitap/', false);
     }
 
