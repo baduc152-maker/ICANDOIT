@@ -6,8 +6,8 @@
 <div class="flex min-h-[70vh] items-center justify-center">
     <div class="w-full max-w-sm">
         <div class="mb-6 text-center">
-            <span class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-indigo-600 text-2xl text-white">✓</span>
-            <h1 class="text-2xl font-bold">Điểm danh từ xa</h1>
+            <img src="{{ asset(config('center.brand.logo_mark')) }}" alt="ICANDOIT" class="mx-auto mb-3 h-16 w-auto">
+            <h1 class="text-2xl font-bold">Khu vực nội bộ</h1>
             <p class="text-sm text-slate-500">Đăng nhập để check-in / check-out</p>
         </div>
 
@@ -34,6 +34,10 @@
                 </button>
             </form>
         </div>
+
+        <p class="mt-5 text-center text-sm text-slate-500">
+            <a href="{{ route('site.home') }}" class="hover:text-indigo-600">← Về website trung tâm</a>
+        </p>
     </div>
 </div>
 @endsection

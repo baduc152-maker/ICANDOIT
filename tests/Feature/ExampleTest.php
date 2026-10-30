@@ -2,18 +2,23 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Trang chủ là website công khai của trung tâm, khách chưa đăng nhập vẫn xem được.
      */
-    public function test_the_application_redirects_guests_to_login(): void
+    public function test_home_page_is_public(): void
     {
-        $response = $this->get('/');
+        $this->get('/')->assertOk();
+    }
 
-        $response->assertRedirect('/login');
+    /**
+     * Khu vực nội bộ vẫn yêu cầu đăng nhập.
+     */
+    public function test_internal_area_requires_login(): void
+    {
+        $this->get('/dashboard')->assertRedirect('/login');
     }
 }

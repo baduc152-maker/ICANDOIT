@@ -1,0 +1,70 @@
+# Xuất website công khai ra HTML tĩnh và lưu vào thư mục docs/ của nhánh này.
+# GitHub Pages phát hành thư mục docs/ đó: không cần PHP nên không bị giới hạn
+# tài nguyên như hosting miễn phí.
+name: Cập nhật website tĩnh
+
+on:
+  push:
+    branches: [claude/icandoit-language-center-website-asx6l9]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+  workflow_dispatch:
+    inputs:
+      base:
+        description: 'Địa chỉ website (để trống: tự lấy tên miền riêng hoặc địa chỉ github.io)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trang-tinh-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  xuat-ban:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tải mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, fileinfo, intl, sqlite3
+          coverage: none
+
+      - name: Cài thư viện
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      - name: Chuẩn bị cấu hình
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Xuất website tĩnh vào docs/
+        run: |
+          BASE="${{ github.event.inputs.base }}"
+          if [ -z "$BASE" ] && [ -f docs/CNAME ]; then
+            BASE="https://$(tr -d '[:space:]' < docs/CNAME)"
+          fi
+          if [ -z "$BASE" ]; then
+            BASE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
+          fi
+          echo "Địa chỉ phát hành: $BASE"
+          php artisan icandoit:export-static --dir=docs --base="$BASE"
+
+      - name: Lưu kết quả vào nhánh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "Website tĩnh không có gì thay đổi."
+          else
+            git commit -m "Cập nhật website tĩnh trong docs/ [skip ci]"
+            git push
+          fi

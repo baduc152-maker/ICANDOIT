@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /attendance
+
+# Thay bằng tên miền thật của trung tâm khi phát hành:
+# Sitemap: https://ten-mien-cua-ban/sitemap.xml

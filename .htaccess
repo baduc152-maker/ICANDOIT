@@ -1,0 +1,18 @@
+# Dùng cho hosting chia sẻ (InfinityFree, AwardSpace, cPanel...) khi không đổi
+# được thư mục gốc: mọi yêu cầu được chuyển vào thư mục public/ của Laravel.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ public/ [L]
+    RewriteRule (.*) public/$1 [L]
+</IfModule>
+
+# Chặn truy cập trực tiếp vào các file cấu hình và mã nguồn nhạy cảm.
+<FilesMatch "^(\.env.*|composer\.(json|lock)|artisan|phpunit\.xml|package(-lock)?\.json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
