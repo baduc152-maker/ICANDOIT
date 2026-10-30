@@ -52,6 +52,49 @@ Sau khi đổi tên miền, chạy lại việc xuất website (Bước 3) để
 trang dùng tên miền mới. Lệnh xuất tự giữ lại file `docs/CNAME` do GitHub tạo, nên
 tên miền không bị mất.
 
+## Bước 2b — Dùng tên miền riêng mua ở Việt Nam (.edu.vn, .vn, .com.vn)
+
+Quy trình giống hệt tên miền `.ct.ws`, chỉ khác bản ghi DNS vì `icandoit.edu.vn`
+là tên miền gốc (apex) chứ không phải tên miền phụ.
+
+Trong trang quản lý DNS của nhà đăng ký (Mắt Bão, PA Việt Nam, Nhân Hoà, iNET,
+Tenten, VNPT...), xoá các bản ghi A/CNAME đang trỏ về trang mặc định rồi thêm:
+
+| Loại | Tên (Host) | Giá trị |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| AAAA | `@` | `2606:50c0:8000::153` |
+| AAAA | `@` | `2606:50c0:8001::153` |
+| AAAA | `@` | `2606:50c0:8002::153` |
+| AAAA | `@` | `2606:50c0:8003::153` |
+| CNAME | `www` | `baduc152-maker.github.io.` |
+
+Bốn bản ghi A là bắt buộc (GitHub chạy nhiều máy chủ); bốn bản ghi AAAA dành cho
+IPv6, thiếu cũng không sao nhưng nên có. Sau đó vào **Settings → Pages →
+Custom domain**, nhập `icandoit.edu.vn` → **Save**. GitHub tự tạo file `CNAME`
+trong thư mục phát hành (`docs/`); nếu thấy file đó nằm ở gốc repo thì chuyển vào
+`docs/`. Chờ GitHub báo *DNS check successful* rồi tích **Enforce HTTPS**.
+
+Cuối cùng vào tab **Actions → Cập nhật website tĩnh → Run workflow**: workflow tự
+đọc `docs/CNAME` và xuất lại toàn bộ trang theo tên miền mới, không phải sửa tay
+chỗ nào.
+
+### Khu vực nội bộ dùng tên miền phụ
+
+Nên tách: `icandoit.edu.vn` cho website công khai (GitHub Pages),
+`noibo.icandoit.edu.vn` cho bản Laravel đầy đủ. Thêm bản ghi A của tên miền phụ
+`noibo` trỏ về địa chỉ IP máy chủ chạy Laravel, rồi dán
+`https://noibo.icandoit.edu.vn` vào trang quản trị → *Thông tin liên hệ* →
+*Địa chỉ khu vực nội bộ*.
+
+Lưu ý: địa chỉ Tailscale Funnel (`...ts.net`) không gắn được tên miền riêng vì
+chứng chỉ bảo mật của nó chỉ cấp cho `ts.net`. Muốn máy ở trung tâm chạy dưới tên
+miền riêng thì dùng **Cloudflare Tunnel** (miễn phí, có cấp chứng chỉ cho tên miền
+của bạn) thay cho Funnel.
+
 ## Bước 3 — Cập nhật website về sau
 
 Mỗi khi mã nguồn hoặc nội dung mặc định thay đổi và được đẩy lên nhánh này,
