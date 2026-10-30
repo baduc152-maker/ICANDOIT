@@ -52,10 +52,16 @@ Sau khi đổi tên miền, chạy lại việc xuất website (Bước 3) để
 trang dùng tên miền mới. Lệnh xuất tự giữ lại file `docs/CNAME` do GitHub tạo, nên
 tên miền không bị mất.
 
-## Bước 2b — Dùng tên miền riêng mua ở Việt Nam (.edu.vn, .vn, .com.vn)
+## Bước 2b — Dùng tên miền riêng mua ở Việt Nam (icandoit.vn)
 
-Quy trình giống hệt tên miền `.ct.ws`, chỉ khác bản ghi DNS vì `icandoit.edu.vn`
-là tên miền gốc (apex) chứ không phải tên miền phụ.
+Quy trình giống tên miền `.ct.ws`, chỉ khác bản ghi DNS vì `icandoit.vn` là tên
+miền gốc (apex) chứ không phải tên miền phụ.
+
+Mua ở bất kỳ nhà đăng ký nào được VNNIC uỷ quyền (Mắt Bão, PA Việt Nam, Nhân Hoà,
+iNET, Tenten, BKNS...). Cá nhân đăng ký được bằng CCCD; phí nhà nước là 100.000đ
+lệ phí đăng ký và 350.000đ/năm phí duy trì, nhà đăng ký thường bán 450.000–500.000đ/năm
+đã gồm dịch vụ. Riêng `.edu.vn` từ 10/02/2026 chỉ cấp cho tổ chức có giấy phép
+hoạt động giáo dục, nên `.vn` là lựa chọn gọn hơn.
 
 Trong trang quản lý DNS của nhà đăng ký (Mắt Bão, PA Việt Nam, Nhân Hoà, iNET,
 Tenten, VNPT...), xoá các bản ghi A/CNAME đang trỏ về trang mặc định rồi thêm:
@@ -74,7 +80,7 @@ Tenten, VNPT...), xoá các bản ghi A/CNAME đang trỏ về trang mặc đị
 
 Bốn bản ghi A là bắt buộc (GitHub chạy nhiều máy chủ); bốn bản ghi AAAA dành cho
 IPv6, thiếu cũng không sao nhưng nên có. Sau đó vào **Settings → Pages →
-Custom domain**, nhập `icandoit.edu.vn` → **Save**. GitHub tự tạo file `CNAME`
+Custom domain**, nhập `icandoit.vn` → **Save**. GitHub tự tạo file `CNAME`
 trong thư mục phát hành (`docs/`); nếu thấy file đó nằm ở gốc repo thì chuyển vào
 `docs/`. Chờ GitHub báo *DNS check successful* rồi tích **Enforce HTTPS**.
 
@@ -84,10 +90,10 @@ chỗ nào.
 
 ### Khu vực nội bộ dùng tên miền phụ
 
-Nên tách: `icandoit.edu.vn` cho website công khai (GitHub Pages),
-`noibo.icandoit.edu.vn` cho bản Laravel đầy đủ. Thêm bản ghi A của tên miền phụ
+Nên tách: `icandoit.vn` cho website công khai (GitHub Pages),
+`noibo.icandoit.vn` cho bản Laravel đầy đủ. Thêm bản ghi A của tên miền phụ
 `noibo` trỏ về địa chỉ IP máy chủ chạy Laravel, rồi dán
-`https://noibo.icandoit.edu.vn` vào trang quản trị → *Thông tin liên hệ* →
+`https://noibo.icandoit.vn` vào trang quản trị → *Thông tin liên hệ* →
 *Địa chỉ khu vực nội bộ*.
 
 Lưu ý: địa chỉ Tailscale Funnel (`...ts.net`) không gắn được tên miền riêng vì
