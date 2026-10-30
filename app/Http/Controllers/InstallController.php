@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -107,6 +108,8 @@ class InstallController extends Controller
             ],
         );
 
+        $this->warmCaches();
+
         $locked = $this->installer->lock();
 
         return view('install.done', [
@@ -114,6 +117,33 @@ class InstallController extends Controller
             'locked' => $locked,
             'appUrl' => $data['app_url'],
         ]);
+    }
+
+    /**
+     * Gom tuyến đường và giao diện vào bộ nhớ đệm. Mỗi lượt truy cập sau đó đọc
+     * ít file hơn hẳn — rất quan trọng trên hosting giới hạn tài nguyên.
+     *
+     * Không gom cấu hình (config:cache): khi đã có file cấu hình đệm, mọi thay
+     * đổi trong .env sẽ bị bỏ qua, mà trên hosting dùng chung thì không có dòng
+     * lệnh để xoá đệm đi.
+     */
+    private function warmCaches(): void
+    {
+        $app = app();
+
+        foreach (['route:cache', 'view:cache'] as $command) {
+            try {
+                Artisan::call($command);
+            } catch (\Throwable) {
+                // Không ghi được bộ nhớ đệm thì website vẫn chạy, chỉ chậm hơn.
+            }
+        }
+
+        // Hai lệnh trên dựng một ứng dụng tạm để đọc lại cấu hình, khiến facade
+        // trỏ sang ứng dụng tạm đó. Trả facade về ứng dụng đang phục vụ yêu cầu
+        // này, nếu không màn hình kết quả sẽ lỗi vì mất dữ liệu dùng chung.
+        Facade::clearResolvedInstances();
+        Facade::setFacadeApplication($app);
     }
 
     private function abortIfInstalled(): void
