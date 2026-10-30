@@ -36,6 +36,24 @@ class AppLink
     }
 
     /**
+     * Đường dẫn vào khu vực nội bộ.
+     *
+     * Bản Laravel đầy đủ trả về trang đăng nhập của chính nó. Bản trang tĩnh
+     * không có trang đăng nhập, nên dùng địa chỉ khu vực nội bộ khai báo trong
+     * phần liên hệ; chưa khai báo thì trả về null để ẩn liên kết.
+     */
+    public static function loginUrl(): ?string
+    {
+        if (! config('center.static_build', false)) {
+            return route('login');
+        }
+
+        $url = trim((string) config('center.contact.internal_url', ''));
+
+        return $url !== '' ? $url : null;
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
     public static function find(string $key): ?array

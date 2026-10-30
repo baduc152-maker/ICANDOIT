@@ -71,6 +71,18 @@ class SiteContentSchema
                     'youtube' => ['label' => 'YouTube', 'type' => 'text', 'rules' => ['required', 'url', 'max:255']],
                     'zalo' => ['label' => 'Zalo', 'type' => 'text', 'rules' => ['required', 'url', 'max:255']],
                     'messenger' => ['label' => 'Messenger', 'type' => 'text', 'rules' => ['required', 'url', 'max:255']],
+                    'form_endpoint' => ['label' => 'Dịch vụ nhận form (bản trang tĩnh)', 'type' => 'text',
+                        'rules' => ['nullable', 'url', 'max:255'],
+                        'help' => 'Chỉ dùng khi website chạy dạng trang tĩnh. Dán link của Web3Forms '
+                            .'hoặc Formspree, ví dụ https://api.web3forms.com/submit. Để trống thì form '
+                            .'đăng ký được thay bằng nút gọi điện và Zalo.'],
+                    'form_key' => ['label' => 'Mã truy cập của dịch vụ nhận form', 'type' => 'text',
+                        'rules' => ['nullable', 'string', 'max:191'],
+                        'help' => 'Web3Forms cấp một mã (access key) gửi về email của bạn. Formspree không cần mã này.'],
+                    'internal_url' => ['label' => 'Địa chỉ khu vực nội bộ', 'type' => 'text',
+                        'rules' => ['nullable', 'url', 'max:255'],
+                        'help' => 'Địa chỉ bản đầy đủ có đăng nhập, điểm danh, lịch công việc và trang quản trị '
+                            .'nội dung. Trang tĩnh dùng địa chỉ này cho liên kết "Khu vực nhân sự".'],
                 ],
             ],
 

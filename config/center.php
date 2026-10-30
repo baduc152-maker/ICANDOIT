@@ -15,6 +15,13 @@
 
 return [
 
+    /*
+    | Bật lên khi website được xuất ra dạng trang tĩnh (lệnh icandoit:export-static).
+    | Lúc đó không có PHP chạy kèm nên các phần cần máy chủ (form đăng ký, đăng
+    | nhập nội bộ) được thay bằng liên kết tương ứng. Không sửa thủ công giá trị này.
+    */
+    'static_build' => false,
+
     'brand' => [
         'name' => 'I CAN DO IT ENGLISH',
         'short' => 'ICANDOIT',
@@ -42,6 +49,19 @@ return [
         'youtube' => 'https://www.youtube.com/',
         'zalo' => 'https://zalo.me/0900000000',
         'messenger' => 'https://m.me/',
+
+        // Khi website được phát hành dưới dạng trang tĩnh (GitHub Pages,
+        // Cloudflare Pages...) thì không có PHP để nhận form đăng ký tư vấn.
+        // Dán vào đây đường dẫn của một dịch vụ nhận form miễn phí
+        // (Web3Forms, Formspree...) để form vẫn hoạt động. Để trống thì form
+        // được thay bằng các nút gọi điện, Zalo, Messenger.
+        'form_endpoint' => '',
+        'form_key' => '',
+
+        // Địa chỉ khu vực nội bộ (bản Laravel đầy đủ: đăng nhập, điểm danh,
+        // lịch công việc, trang quản trị nội dung). Trang tĩnh dùng giá trị này
+        // cho liên kết "Khu vực nhân sự"; để trống thì liên kết được ẩn.
+        'internal_url' => '',
     ],
 
     /*

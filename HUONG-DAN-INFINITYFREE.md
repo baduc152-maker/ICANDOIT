@@ -1,5 +1,13 @@
 # Hướng dẫn lấy tên miền miễn phí và đưa website lên InfinityFree
 
+> **Lưu ý về giới hạn tài nguyên.** Bản miễn phí của InfinityFree chỉ cho mỗi
+> website một lượng CPU nhỏ mỗi giờ. Website Laravel chạy PHP ở mọi lượt truy
+> cập nên dễ gặp thông báo *"This site/page has used all available resources
+> allowed for a free hosting account"* và bị khoá tới giờ sau. Muốn khỏi hẳn
+> chuyện đó, phát hành phần website công khai dưới dạng HTML tĩnh theo
+> **[HUONG-DAN-GITHUB-PAGES.md](HUONG-DAN-GITHUB-PAGES.md)** — miễn phí và không
+> tính CPU.
+
 **InfinityFree** là nhà cung cấp hosting PHP miễn phí (không cần thẻ ngân hàng),
 kèm tên miền phụ miễn phí với các đuôi **`.ct.ws`**, **`.rf.gd`**,
 **`.infinityfreeapp.com`**… Kết quả cuối cùng: website chạy tại địa chỉ dạng

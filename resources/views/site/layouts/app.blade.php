@@ -5,6 +5,7 @@
     $contact = config('center.contact');
     $studentApps = AppLink::for(AppLink::PUBLIC);
     $staffApps = AppLink::for(AppLink::INTERNAL);
+    $loginUrl = AppLink::loginUrl();
     $navItems = [
         ['route' => 'site.home', 'label' => 'Trang chủ'],
         ['route' => 'site.about', 'label' => 'Giới thiệu'],
@@ -69,7 +70,9 @@
                 <li>🕗 {{ $contact['working_hours'] }}</li>
             </ul>
             <ul class="topbar__list" style="list-style:none;margin:0;padding:0">
-                <li><a href="{{ route('login') }}">Khu vực nhân sự</a></li>
+                @if($loginUrl)
+                    <li><a href="{{ $loginUrl }}">Khu vực nhân sự</a></li>
+                @endif
                 @foreach($staffApps as $app)
                     <li><a href="{{ $app['url'] }}" target="_blank" rel="noopener">{{ $app['label'] }} ↗</a></li>
                 @endforeach
@@ -173,7 +176,9 @@
                     @foreach($studentApps->merge($staffApps) as $app)
                         <li><a href="{{ $app['url'] }}" target="_blank" rel="noopener">{{ $app['label'] }} ↗</a></li>
                     @endforeach
-                    <li><a href="{{ route('login') }}">Khu vực nhân sự</a></li>
+                    @if($loginUrl)
+                        <li><a href="{{ $loginUrl }}">Khu vực nhân sự</a></li>
+                    @endif
                 </ul>
             </div>
 

@@ -6,6 +6,16 @@
         array_column(config('center.courses'), 'name'),
         config('center.consult_topics'),
     );
+
+    $contact = config('center.contact');
+
+    // Bản trang tĩnh không có PHP để nhận form. Nếu trung tâm đã khai báo một
+    // dịch vụ nhận form miễn phí thì gửi sang đó, nếu chưa thì thay form bằng
+    // các kênh liên hệ trực tiếp.
+    $endpoint = trim((string) ($contact['form_endpoint'] ?? ''));
+    $formKey = trim((string) ($contact['form_key'] ?? ''));
+    $external = $endpoint !== '';
+    $action = $external ? $endpoint : (config('center.static_build', false) ? null : route('site.consult'));
 @endphp
 
 <div class="lead-card" id="dang-ky">
@@ -20,8 +30,18 @@
         <div class="alert alert--error" role="alert">Vui lòng kiểm tra lại thông tin bên dưới.</div>
     @endif
 
-    <form method="POST" action="{{ route('site.consult') }}" novalidate>
-        @csrf
+    @if($action)
+    <form method="POST" action="{{ $action }}" novalidate>
+        @if($external)
+            {{-- Dịch vụ nhận form bên ngoài: không có token CSRF của website. --}}
+            @if($formKey !== '')
+                <input type="hidden" name="access_key" value="{{ $formKey }}">
+            @endif
+            <input type="hidden" name="subject" value="Đăng ký tư vấn từ website {{ config('center.brand.name') }}">
+            <input type="hidden" name="_subject" value="Đăng ký tư vấn từ website {{ config('center.brand.name') }}">
+        @else
+            @csrf
+        @endif
 
         <div class="field">
             <label for="cf-name">Họ và tên <span class="req">*</span></label>
@@ -72,4 +92,14 @@
         <button type="submit" class="btn btn--primary btn--block">Gửi thông tin đăng ký</button>
         <p class="form-note">Thông tin của bạn chỉ dùng để liên hệ tư vấn và không chia sẻ cho bên thứ ba.</p>
     </form>
+    @else
+        {{-- Trang tĩnh chưa khai báo dịch vụ nhận form: mời liên hệ trực tiếp. --}}
+        <div class="lead-card__direct">
+            <a class="btn btn--primary btn--block" href="{{ $contact['hotline_href'] }}">☎ Gọi {{ $contact['hotline'] }}</a>
+            <a class="btn btn--ghost btn--block" href="{{ $contact['zalo'] }}" target="_blank" rel="noopener">Nhắn tin Zalo</a>
+            <a class="btn btn--ghost btn--block" href="{{ $contact['messenger'] }}" target="_blank" rel="noopener">Nhắn tin Messenger</a>
+            <a class="btn btn--ghost btn--block" href="mailto:{{ $contact['email'] }}">✉ {{ $contact['email'] }}</a>
+            <p class="form-note">Trung tâm phản hồi trong giờ làm việc: {{ $contact['working_hours'] }}.</p>
+        </div>
+    @endif
 </div>

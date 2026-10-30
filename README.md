@@ -214,13 +214,30 @@ Driver được chọn tại `App\Providers\AppServiceProvider` dựa theo
 
 ## Đưa website lên mạng
 
+### Cách 1 (khuyến nghị) · Website tĩnh trên GitHub Pages — không giới hạn tài nguyên
+
+Lệnh `php artisan icandoit:export-static` xuất toàn bộ phần website công khai ra
+HTML tĩnh trong thư mục `docs/`. GitHub Pages phát hành thư mục đó miễn phí và
+**không tính CPU**, nên không còn gặp lỗi *"used all available resources"* của
+hosting PHP miễn phí. Khu vực nội bộ (đăng nhập, điểm danh, lịch công việc, quản
+trị nội dung) vẫn chạy bằng bản Laravel đầy đủ ở nơi khác; dán địa chỉ của bản đó
+vào trang quản trị → *Thông tin liên hệ* → *Địa chỉ khu vực nội bộ*.
+
+Từng bước (kèm cách gắn tên miền `icandoit.ct.ws` và cách cho form đăng ký hoạt
+động lại): **[HUONG-DAN-GITHUB-PAGES.md](HUONG-DAN-GITHUB-PAGES.md)**.
+Workflow `.github/workflows/trang-tinh.yml` tự xuất lại `docs/` mỗi lần đẩy mã lên.
+
+### Cách 2 · Bản Laravel đầy đủ trên hosting PHP
+
 Sau khi tải mã nguồn lên máy chủ, mở **`/cai-dat`** trên trình duyệt: trang cài
 đặt sẽ hỏi thông tin cơ sở dữ liệu và tài khoản quản trị, tự ghi file `.env`, tạo
 toàn bộ bảng dữ liệu rồi tự khoá lại. Không cần SSH, không cần chạy lệnh nào.
 
 Muốn có địa chỉ miễn phí nhanh nhất: xem
 **[HUONG-DAN-INFINITYFREE.md](HUONG-DAN-INFINITYFREE.md)** — từng bước lấy
-tên miền miễn phí (`.ct.ws`, `.rf.gd`…) và đưa website lên InfinityFree.
+tên miền miễn phí (`.ct.ws`, `.rf.gd`…) và đưa website lên InfinityFree. Lưu ý
+bản miễn phí của InfinityFree giới hạn CPU theo giờ, website đông khách sẽ bị khoá
+tạm thời; khi đó dùng Cách 1.
 
 Xem **[HUONG-DAN-TRIEN-KHAI.md](HUONG-DAN-TRIEN-KHAI.md)**: so sánh các cách
 triển khai miễn phí (máy sẵn có + Tailscale Funnel, hosting PHP miễn phí, VPS
