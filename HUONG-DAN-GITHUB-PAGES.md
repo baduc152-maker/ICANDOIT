@@ -63,6 +63,10 @@ lệ phí đăng ký và 350.000đ/năm phí duy trì, nhà đăng ký thường
 đã gồm dịch vụ. Riêng `.edu.vn` từ 10/02/2026 chỉ cấp cho tổ chức có giấy phép
 hoạt động giáo dục, nên `.vn` là lựa chọn gọn hơn.
 
+Muốn rẻ thì `icandoit.io.vn` cũng được, cách cài đặt giống hệt (phí nhà nước
+10.000đ đăng ký + 20.000đ/năm, nhà đăng ký bán 30.000–50.000đ/năm). Mọi bản ghi
+DNS bên dưới giữ nguyên, chỉ thay tên miền khi khai ở GitHub.
+
 Trong trang quản lý DNS của nhà đăng ký (Mắt Bão, PA Việt Nam, Nhân Hoà, iNET,
 Tenten, VNPT...), xoá các bản ghi A/CNAME đang trỏ về trang mặc định rồi thêm:
 
