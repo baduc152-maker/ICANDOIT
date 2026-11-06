@@ -225,6 +225,8 @@ vào trang quản trị → *Thông tin liên hệ* → *Địa chỉ khu vực 
 
 Từng bước (kèm cách gắn tên miền `icandoit.ct.ws` và cách cho form đăng ký hoạt
 động lại): **[HUONG-DAN-GITHUB-PAGES.md](HUONG-DAN-GITHUB-PAGES.md)**.
+Muốn app bài tập và khu vực nội bộ trên máy trung tâm cũng chạy dưới tên miền
+riêng: **[HUONG-DAN-APP-BAITAP-TEN-MIEN.md](HUONG-DAN-APP-BAITAP-TEN-MIEN.md)**.
 Workflow `.github/workflows/trang-tinh.yml` tự xuất lại `docs/` mỗi lần đẩy mã lên.
 
 ### Cách 2 · Bản Laravel đầy đủ trên hosting PHP
