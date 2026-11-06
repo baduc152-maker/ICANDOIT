@@ -84,6 +84,28 @@ Làm tương tự với tên miền phụ `noibo.icandoit.vn` nếu muốn đưa
 (điểm danh, lịch công việc, quản trị nội dung) ra tên miền riêng: thêm một
 *Public Hostname* nữa trong cùng tunnel, trỏ về cổng của bản Laravel.
 
+## Nếu không muốn đặt server ở máy trung tâm
+
+Khi đó app bài tập (và khu vực nội bộ) cần một chỗ chạy 24/7 thuê ngoài. Website
+công khai vẫn ở GitHub Pages, miễn phí, không đổi gì.
+
+| Phương án | Chi phí | Phù hợp khi |
+| --- | --- | --- |
+| **Hosting PHP trả phí** (AZDIGI, TinoHost, Vietnix, Hostinger…) | ~30.000–60.000đ/tháng, trả theo năm | App viết bằng PHP + MySQL. Dễ nhất: có cPanel, phpMyAdmin, hỗ trợ tiếng Việt, không phải quản trị máy chủ |
+| **VPS giá rẻ** trong nước | ~79.000–150.000đ/tháng | App viết bằng Node.js, Python… hoặc cần cài phần mềm riêng |
+| **Oracle Cloud Always Free** | 0đ vĩnh viễn | Máy ảo 4 nhân / 24 GB RAM, nhưng phải có thẻ Visa/Mastercard để xác minh và phải tự cài Linux |
+
+Khuyến nghị: nếu app chạy bằng PHP thì mua **hosting PHP trả phí** — rẻ, chạy
+24/7, có người hỗ trợ bằng tiếng Việt khi hỏng. Toàn bộ công cụ đã chuẩn bị trong
+dự án này (gói nén `scripts/build-release.sh`, trang cài đặt `/cai-dat`, file
+`database/schema/mysql-schema.sql`) dùng được thẳng trên hosting trả phí; lần
+triển khai InfinityFree chỉ hỏng vì giới hạn tài nguyên của **bản miễn phí**,
+không phải vì mã nguồn.
+
+Với hosting hoặc VPS thuê ngoài thì **không cần Cloudflare Tunnel nữa**: chỉ cần
+thêm bản ghi A của tên miền phụ trỏ về địa chỉ IP nhà cung cấp cấp cho, ví dụ
+`baitap` → `203.0.113.10`, rồi bật SSL miễn phí (Let's Encrypt) trong cPanel.
+
 ## Giới hạn cần biết
 
 - **Máy phải bật.** Máy tắt, mất điện hay mất mạng là học viên không nộp bài được.
